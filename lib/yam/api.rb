@@ -1,6 +1,11 @@
+require 'yam/request'
+require 'yam/connection'
+require 'yam/configuration'
+
 module Yam
-  # Core class for api interface operations
   class API
+    include Connection
+    include Request
     attr_reader *Configuration::VALID_OPTIONS_KEYS
 
     class_eval do
@@ -12,14 +17,20 @@ module Yam
       end
     end
 
-    # Creates new API
     def initialize(options={}, &block)
       setup(options)
     end
 
     def setup(options={})
+      options = Yam.options.merge(options)
       Configuration::VALID_OPTIONS_KEYS.each do |key|
         send("#{key}=", options[key])
+      end
+    end
+
+    def method_missing(method, *args, &block)
+      if method.to_s.match /^(.*)\?$/
+        return !self.send($1.to_s).nil?
       end
     end
   end

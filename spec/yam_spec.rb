@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 require 'spec_helper'
-
+class TestClass
+end
 describe Yam do
 
   after do
@@ -16,11 +17,28 @@ describe Yam do
     subject.new.should be_a Yam::Client
   end
 
+  it "should delegate to a Yam::Client instance" do
+    Yam::Client.any_instance.stubs(:stubbed_method)
+
+    Yam.stubbed_method
+
+    Yam::Client.any_instance.should have_received(:stubbed_method)
+  end
+
   it "should respond to 'configure' message" do
     subject.should respond_to :configure
   end
 
   describe "setting configuration options" do
+    it "should return default adapter" do
+      subject.adapter.should == Yam::Configuration::DEFAULT_ADAPTER
+    end
+
+    it "should allow to set adapter" do
+      subject.adapter = :typhoeus
+      subject.adapter.should == :typhoeus
+    end
+
     it "should return the default end point" do
       subject.endpoint.should == Yam::Configuration::DEFAULT_ENDPOINT
     end
@@ -28,6 +46,15 @@ describe Yam do
     it "should allow to set endpoint" do
       subject.endpoint = 'http://linkedin.com'
       subject.endpoint.should == 'http://linkedin.com'
+    end
+
+    it "should return the default user agent" do
+      subject.user_agent.should == Yam::Configuration::DEFAULT_USER_AGENT
+    end
+
+    it "should allow to set new user agent" do
+      subject.user_agent = 'New User Agent'
+      subject.user_agent.should == 'New User Agent'
     end
 
     it "should have not set oauth token" do
