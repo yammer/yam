@@ -1,24 +1,23 @@
-# encoding: utf-8
-
 module Yam
   module Configuration
 
     VALID_OPTIONS_KEYS = [
-      :oauth_token,
+      :adapter,
       :endpoint,
+      :oauth_token,
+      :user_agent,
     ].freeze
 
-    # By default, don't set a user oauth access token
-    DEFAULT_OAUTH_TOKEN = nil
+    DEFAULT_ADAPTER = :net_http
 
-    # The api endpoint used to connect to GitHub if none is set
-    DEFAULT_ENDPOINT = 'https://www.yammer.com'.freeze
+    DEFAULT_ENDPOINT = 'https://www.yammer.com/api/v1'.freeze
+
+    DEFAULT_OAUTH_TOKEN = nil
 
     DEFAULT_USER_AGENT = "Yam Ruby Gem #{Yam::VERSION}".freeze
 
     attr_accessor *VALID_OPTIONS_KEYS
 
-    # Convenience method to allow for global setting of configuration options
     def configure
       yield self
     end
@@ -34,10 +33,12 @@ module Yam
     end
 
     def set_defaults
-      self.oauth_token        = DEFAULT_OAUTH_TOKEN
+      self.adapter            = DEFAULT_ADAPTER
       self.endpoint           = DEFAULT_ENDPOINT
+      self.oauth_token        = DEFAULT_OAUTH_TOKEN
+      self.user_agent         = DEFAULT_USER_AGENT
       self
     end
 
-  end # Configuration
-end # Yam
+  end
+end
