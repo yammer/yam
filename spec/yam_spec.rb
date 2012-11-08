@@ -44,8 +44,8 @@ describe Yam do
     end
 
     it "should allow to set endpoint" do
-      subject.endpoint = 'http://linkedin.com'
-      subject.endpoint.should == 'http://linkedin.com'
+      subject.endpoint = 'http://www.example.com'
+      subject.endpoint.should == 'http://www.example.com'
     end
 
     it "should return the default user agent" do
