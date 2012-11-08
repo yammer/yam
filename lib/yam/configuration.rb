@@ -3,16 +3,16 @@ module Yam
 
     VALID_OPTIONS_KEYS = [
       :adapter,
+      :endpoint,
       :oauth_token,
       :user_agent,
-      :endpoint,
     ].freeze
 
     DEFAULT_ADAPTER = :net_http
 
-    DEFAULT_OAUTH_TOKEN = nil
-
     DEFAULT_ENDPOINT = 'https://www.yammer.com/api/v1'.freeze
+
+    DEFAULT_OAUTH_TOKEN = nil
 
     DEFAULT_USER_AGENT = "Yam Ruby Gem #{Yam::VERSION}".freeze
 
@@ -34,9 +34,9 @@ module Yam
 
     def set_defaults
       self.adapter            = DEFAULT_ADAPTER
+      self.endpoint           = DEFAULT_ENDPOINT
       self.oauth_token        = DEFAULT_OAUTH_TOKEN
       self.user_agent         = DEFAULT_USER_AGENT
-      self.endpoint           = DEFAULT_ENDPOINT
       self
     end
 
