@@ -21,7 +21,7 @@ module Yam
       }.merge(options)
     end
 
-    # Returns a Fraday::Connection object
+    # Returns a Faraday::Connection object
     #
     def connection(options = {})
       conn_options = default_options(options)
