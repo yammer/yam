@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'spec_helper'
 class TestClass
 end
@@ -83,4 +81,4 @@ describe Yam do
     end
   end
 
-end # Yam
+end

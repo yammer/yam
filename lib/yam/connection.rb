@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'faraday'
 require 'yam/constants'
 require 'faraday_middleware/response/mashify'
