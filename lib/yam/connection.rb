@@ -37,7 +37,7 @@ module Yam
           conn.use FaradayMiddleware::OAuth2, oauth_token
         end
 
-        conn.request  :url_encoded
+        conn.request :url_encoded
         conn.adapter adapter
       end
     end

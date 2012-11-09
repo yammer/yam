@@ -1,5 +1,5 @@
+# Defines HTTP verbs
 module Yam
-  # Defines HTTP verbs
   module Request
     def get(path, params={}, options={})
       request(:get, path, params, options)
