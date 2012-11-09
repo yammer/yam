@@ -1,3 +1,5 @@
+# API setup and configuration
+
 require 'yam/request'
 require 'yam/connection'
 require 'yam/configuration'
