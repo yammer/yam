@@ -6,11 +6,11 @@ require 'yam/version'
 Gem::Specification.new do |gem|
   gem.name          = "yam"
   gem.version       = Yam::VERSION
-  gem.authors       = ["Mason Fischer"]
-  gem.email         = ["mason@thoughtbot.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.authors       = ["Mason Fischer", "Jessie A. Young"]
+  gem.email         = ["mason@thoughtbot.com", "jessie@apprentice.io"]
+  gem.description   = %q{The official Yammer Ruby gem.}
+  gem.summary       = %q{A Ruby wrapper for the Yammer REST API}
+  gem.homepage      = %q{https://github.com/yammer/yam}
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
