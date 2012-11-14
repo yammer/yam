@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'faraday_middleware', '~> 0.9.0'
   gem.add_dependency 'multi_json', '~> 1.3'
   gem.add_dependency 'oauth2', '~> 0.8.0'
-  gem.add_dependency 'rspec', '~> 2.12'
+  gem.add_dependency 'rspec'
   gem.add_development_dependency 'simplecov', '~> 0.7.1'
   gem.add_development_dependency 'mocha', '~> 0.9.8'
   gem.add_development_dependency 'bourne', '~> 1.0'
