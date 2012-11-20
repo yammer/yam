@@ -11,13 +11,13 @@ module Yam
 
     def default_options(options={})
       {
-        headers: {
+        :headers => {
           ACCEPT           => 'application/json',
           ACCEPT_CHARSET   => 'utf-8',
           USER_AGENT       => user_agent
         },
-        ssl: { verify: false },
-        url: options.fetch(:endpoint) { Yam.endpoint }
+        :ssl => { :verify => false },
+        :url => options.fetch(:endpoint) { Yam.endpoint }
       }.merge(options)
     end
 
