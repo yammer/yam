@@ -1,8 +1,10 @@
-# Yam
+Yam
+===
 
 The official Yammer Ruby gem.
 
-## Installation
+Installation
+------------
 
 Add this line to your application's Gemfile:
 
@@ -22,11 +24,10 @@ Or install it yourself as:
 $ gem install yam
 ```
 
-## General Configuration
+General Configuration
+---------------------
 
 The Yammer API requires you to authenticate via OAuth, so you'll need to register your Yammer application. To register a new application, sign in to Yammer and then fill out the form at https://www.yammer.com/client_applications.
-
-#### Retrieving your Yammer access token
 
 If you already have your access token, you can skip this section.
 
@@ -47,24 +48,23 @@ Sample access token (token is 'abcdefghijklmn' in this example) as part of respo
 
 ```
 “access_token”: {
-“view_subscriptions”: true,
-“expires_at”: null,
-authorized_at”: “2011/04/06 16:25:46 +0000”,
-“modify_subscriptions”: true,
-“modify_messages”: true,
-“network_permalink”: “yammer-inc.com”,
-“view_members”: true,
-“view_tags”: true,
-“network_id”: 155465488,
-“user_id”: 1014216,
-“view_groups”: true,
-“token”: “abcdefghijklmn”,
-“network_name”: “Yammer”,
-“view_messages”: true,
-“created_at”: “2011/04/06 16:25:46 +0000”
+  “view_subscriptions”: true,
+  “expires_at”: null,
+  authorized_at”: “2011/04/06 16:25:46 +0000”,
+  “modify_subscriptions”: true,
+  “modify_messages”: true,
+  “network_permalink”: “yammer-inc.com”,
+  “view_members”: true,
+  “view_tags”: true,
+  “network_id”: 155465488,
+  “user_id”: 1014216,
+  “view_groups”: true,
+  “token”: “abcdefghijklmn”,
+  “network_name”: “Yammer”,
+  “view_messages”: true,
+  “created_at”: “2011/04/06 16:25:46 +0000”
 }
 ```
-#### Set the OAuth Token
 
 Set the OAuth token on your app. Example:
 
@@ -73,7 +73,9 @@ Yam.configure do |config|
   config.oauth_token = your_oauth_token
 end
 ```
-## Rails Configuration
+
+Rails Configuration
+-------------------
 
 Retrieve your access token using the steps outlined in the <a href="#general-configuration">general configuration</a> section above.
 
@@ -85,11 +87,14 @@ Yam.configure do |config|
 end
 ```
 
-#### Set up Yammer OAuth 2.0
+Set up Yammer OAuth 2.0
+-----------------------
 
 See Yammer's Developer Guide for step-by-step instructions on setting up OAuth 2.0: <http://developer.yammer.com/files/2012/10/PlatformDeveloperGuide.pdf>
 
-## Usage Examples
+Usage Examples
+--------------
+
 All examples require an authenticated Yammer client. See the <a
 href="#general-configuration">general configuration</a> section for instructions for finding and setting your access token.
 
@@ -131,10 +136,7 @@ Yam.post('/messages', body: 'this is a group message', group_id: 987654)
 Yam.post('/messages', :body: 'here is my open graph object', og_url: "https://www.yammer.com/example/graph/123456789")
 ```
 
-## Contributing
+Contributing
+------------
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+To contribute to this project, see the [CONTRIBUTING.md](https://github.com/yammer/yam/blob/master/CONTRIBUTING.md) file.
