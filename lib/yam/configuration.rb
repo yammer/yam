@@ -14,10 +14,9 @@
 #
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
-#
+
 module Yam
   module Configuration
-
     VALID_OPTIONS_KEYS = [
       :adapter,
       :endpoint,
@@ -50,12 +49,11 @@ module Yam
     end
 
     def set_defaults
-      self.adapter            = DEFAULT_ADAPTER
-      self.endpoint           = DEFAULT_ENDPOINT
-      self.oauth_token        = DEFAULT_OAUTH_TOKEN
-      self.user_agent         = DEFAULT_USER_AGENT
+      self.adapter = DEFAULT_ADAPTER
+      self.endpoint = DEFAULT_ENDPOINT
+      self.oauth_token = DEFAULT_OAUTH_TOKEN
+      self.user_agent = DEFAULT_USER_AGENT
       self
     end
-
   end
 end
