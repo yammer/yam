@@ -38,7 +38,7 @@ Laptop setup
 
 Fork the repo and clone the app:
 
-    git clone git@github.com:[GIT_USERNAME]/sched.do.git
+    git clone git@github.com:[GIT_USERNAME]/yam.git
 
 
 Install Bundler 1.2.0.pre or higher:

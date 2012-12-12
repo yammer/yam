@@ -3,6 +3,8 @@ Yam
 
 The official Yammer Ruby gem.
 
+NOTE: Currently in alpha - use at your own risk
+
 Installation
 ------------
 
