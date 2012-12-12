@@ -14,29 +14,30 @@
 #
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
-#
+
 require 'spec_helper'
+ENDPOINT = Yam::Configuration::DEFAULT_API_ENDPOINT
 
 describe Yam::Client, '#get' do
   it 'makes requests' do
-    stub_get('/custom/get')
-    subject.get('/custom/get')
-    expect(a_get('/custom/get')).to have_been_made
+    stub_request(:get, ENDPOINT)
+    access_token = 'ABC123'
+
+    instance = Yam::Client.new(access_token, ENDPOINT)
+    instance.get('/')
+
+    expect(a_request(:get, ENDPOINT)).to have_been_made
   end
 end
 
 describe Yam::Client, '#post' do
   it 'makes requests' do
-    stub_post('/custom/post')
-    subject.post('/custom/post')
-    expect(a_post('/custom/post')).to have_been_made
-  end
+    stub_request(:post, ENDPOINT)
+    access_token = 'ABC123'
 
-  it 'makes authorized requests' do
-    access_token = '123'
-    Yam.oauth_token = access_token
-    stub_post("/custom/post?access_token=#{access_token}")
-    subject.post('/custom/post')
-    expect(a_post("/custom/post?access_token=#{access_token}")).to have_been_made
+    instance = Yam::Client.new(access_token, ENDPOINT)
+    instance.post('/')
+
+    expect(a_request(:post, ENDPOINT)).to have_been_made
   end
 end
