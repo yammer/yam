@@ -14,7 +14,6 @@
 #
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
-#
 
 # API setup and configuration
 require 'yam/request'
@@ -36,12 +35,15 @@ module Yam
       end
     end
 
-    def initialize(options={}, &block)
-      setup(options)
+    def initialize(oauth_token, endpoint)
+      @oauth_token = oauth_token
+      @endpoint = endpoint
+      setup({})
     end
 
     def setup(options={})
       options = Yam.options.merge(options)
+
       Configuration::VALID_OPTIONS_KEYS.each do |key|
         send("#{key}=", options[key])
       end

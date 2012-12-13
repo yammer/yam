@@ -15,9 +15,9 @@
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
 
-require 'yam/version'
-require 'yam/configuration'
 require 'yam/client'
+require 'yam/configuration'
+require 'yam/version'
 
 module Yam
   extend Configuration
@@ -27,18 +27,8 @@ module Yam
     attr_accessor :api_client
 
     # Alias for Yam::Client.new
-    def new(options = {}, &block)
-      @api_client = Yam::Client.new(options, &block)
-    end
-
-    # Delegate to Yam::Client
-    def method_missing(method, *args, &block)
-      return super unless new.respond_to?(method)
-      new.send(method, *args, &block)
-    end
-
-    def respond_to?(method, include_private = false)
-      new.respond_to?(method, include_private) || super(method, include_private)
+    def new(oauth_token, endpoint)
+      @api_client = Yam::Client.new(oauth_token, endpoint)
     end
   end
 end

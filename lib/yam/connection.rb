@@ -14,7 +14,7 @@
 #
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
-#
+
 require 'faraday'
 require 'yam/constants'
 require 'faraday_middleware/response/mashify'
@@ -39,7 +39,6 @@ module Yam
     end
 
     # Returns a Faraday::Connection object
-    #
     def connection(options = {})
       conn_options = default_options(options)
       clear_cache unless options.empty?
@@ -49,11 +48,7 @@ module Yam
         conn.use Faraday::Response::Mashify
         conn.use FaradayMiddleware::ParseJson
         conn.response :raise_error
-
-        if oauth_token?
-          conn.use FaradayMiddleware::OAuth2, oauth_token
-        end
-
+        conn.use FaradayMiddleware::OAuth2, oauth_token
         conn.request :url_encoded
         conn.adapter adapter
       end
