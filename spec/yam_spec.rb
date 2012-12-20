@@ -21,11 +21,9 @@ class TestClass
 end
 
 describe Yam do
-  # after do
-  #   Yam.set_defaults
-  # end
-
-  ENDPOINT = Yam::Configuration::DEFAULT_API_ENDPOINT
+  after do
+    Yam.set_defaults
+  end
 
   it 'responds to \'new\' message' do
     Yam.should respond_to :new
@@ -34,7 +32,7 @@ describe Yam do
   it 'receives \'new\' and initialize an instance' do
     access_token = 'ABC123'
 
-    instance = Yam.new(access_token, ENDPOINT)
+    instance = Yam.new(access_token, Yam::Configuration::DEFAULT_API_ENDPOINT)
 
     instance.should be_a Yam::Client
   end
@@ -43,7 +41,7 @@ describe Yam do
     access_token = 'ABC123'
     Yam::Client.any_instance.stubs(:stubbed_method)
 
-    instance = Yam.new(access_token, ENDPOINT)
+    instance = Yam.new(access_token, Yam::Configuration::DEFAULT_API_ENDPOINT)
     instance.stubbed_method
 
     Yam::Client.any_instance.should have_received(:stubbed_method)
@@ -63,7 +61,7 @@ describe Yam do
     end
 
     it 'returns the default end point' do
-      Yam.endpoint.should == ENDPOINT
+      Yam.endpoint.should == Yam::Configuration::DEFAULT_API_ENDPOINT
     end
 
     it 'allows setting the endpoint' do

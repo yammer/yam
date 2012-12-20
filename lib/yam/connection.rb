@@ -34,7 +34,7 @@ module Yam
           USER_AGENT       => user_agent
         },
         :ssl => { :verify => true },
-        :url => options.fetch(:endpoint) { Yam.endpoint }
+        :url => options.fetch(:endpoint) { endpoint }
       }.merge(options)
     end
 

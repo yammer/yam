@@ -30,7 +30,7 @@ module Yam
       conn = connection(options)
       path = (conn.path_prefix + path).gsub(/\/\//,'/') if conn.path_prefix != '/'
 
-      response = conn.send(method,path,params)
+      response = conn.send(method, path, params)
       response.body
     end
   end

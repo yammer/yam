@@ -26,6 +26,8 @@ require 'yam'
 require 'webmock/rspec'
 require 'bourne'
 
+ENDPOINT = Yam::Configuration::DEFAULT_API_ENDPOINT
+
 RSpec.configure do |config|
   config.mock_with :mocha
   config.include WebMock::API
