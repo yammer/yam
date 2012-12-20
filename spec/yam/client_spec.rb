@@ -16,28 +16,35 @@
 # permissions and limitations under the License.
 
 require 'spec_helper'
-ENDPOINT = Yam::Configuration::DEFAULT_API_ENDPOINT
 
 describe Yam::Client, '#get' do
   it 'makes requests' do
-    stub_request(:get, ENDPOINT)
     access_token = 'ABC123'
+    endpoint_with_token = "#{ENDPOINT}?access_token=#{access_token}"
+    stub_request(:get, endpoint_with_token).
+      with(:headers => { 'Authorization'=>'Token token="ABC123"' })
 
     instance = Yam::Client.new(access_token, ENDPOINT)
     instance.get('/')
 
-    expect(a_request(:get, ENDPOINT)).to have_been_made
+    expect(a_request(:get, endpoint_with_token).
+      with(:headers => { 'Authorization'=>'Token token="ABC123"' })).
+      to have_been_made
   end
 end
 
 describe Yam::Client, '#post' do
   it 'makes requests' do
-    stub_request(:post, ENDPOINT)
     access_token = 'ABC123'
+    endpoint_with_token = "#{ENDPOINT}?access_token=#{access_token}"
+    stub_request(:post, endpoint_with_token).
+      with(:headers => { 'Authorization'=>'Token token="ABC123"' })
 
     instance = Yam::Client.new(access_token, ENDPOINT)
     instance.post('/')
 
-    expect(a_request(:post, ENDPOINT)).to have_been_made
+    expect(a_request(:post, endpoint_with_token).
+      with(:headers => { 'Authorization'=>'Token token="ABC123"' })).
+      to have_been_made
   end
 end
