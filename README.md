@@ -1,6 +1,8 @@
 Yam
 ===
 
+![Build Status](https://api.travis-ci.org/yammer/yam.png)
+
 The official Yammer Ruby gem.
 
 NOTE: Currently in alpha - use at your own risk
