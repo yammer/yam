@@ -16,5 +16,5 @@
 # permissions and limitations under the License.
 
 module Yam
-  VERSION = '0.0.5'
+  VERSION = '0.0.6'
 end

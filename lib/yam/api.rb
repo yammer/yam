@@ -16,9 +16,9 @@
 # permissions and limitations under the License.
 
 # API setup and configuration
-require 'yam/request'
-require 'yam/connection'
 require 'yam/configuration'
+require 'yam/connection'
+require 'yam/request'
 
 module Yam
   class API
