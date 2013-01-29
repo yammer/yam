@@ -16,10 +16,10 @@
 # permissions and limitations under the License.
 
 require 'faraday'
-require 'yam/constants'
+require 'faraday_middleware/request/oauth2'
 require 'faraday_middleware/response/mashify'
 require 'faraday_middleware/response/parse_json'
-require 'faraday_middleware/request/oauth2'
+require 'yam/constants'
 
 module Yam
   module Connection

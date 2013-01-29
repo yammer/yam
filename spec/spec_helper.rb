@@ -21,10 +21,10 @@ SimpleCov.start do
   add_filter 'spec'
 end
 
-require 'rspec'
-require 'yam'
-require 'webmock/rspec'
 require 'bourne'
+require 'rspec'
+require 'webmock/rspec'
+require 'yam'
 
 ENDPOINT = Yam::Configuration::DEFAULT_API_ENDPOINT
 
