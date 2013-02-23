@@ -1,7 +1,7 @@
 Yam
 ===
 
-[![Build Status](https://api.travis-ci.org/yammer/yam.png)](https://travis-ci.org/yammer/yam)
+[![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)](https://travis-ci.org/yammer/yam)
 
 The official Yammer Ruby gem.
 
