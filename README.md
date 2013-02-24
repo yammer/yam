@@ -53,44 +53,31 @@ To retrieve your access token, follow these steps.
 Sample access token (token is 'abcdefghijklmn' in this example) as part of response:
 
 ```
-“access_token”: {
-  “view_subscriptions”: true,
-  “expires_at”: null,
-  authorized_at”: “2011/04/06 16:25:46 +0000”,
-  “modify_subscriptions”: true,
-  “modify_messages”: true,
-  “network_permalink”: “yammer-inc.com”,
-  “view_members”: true,
-  “view_tags”: true,
-  “network_id”: 155465488,
-  “user_id”: 1014216,
-  “view_groups”: true,
-  “token”: “abcdefghijklmn”,
-  “network_name”: “Yammer”,
-  “view_messages”: true,
-  “created_at”: “2011/04/06 16:25:46 +0000”
+"access_token": {
+  "view_subscriptions": true,
+  "expires_at": null,
+  authorized_at": "2011/04/06 16:25:46 +0000",
+  "modify_subscriptions": true,
+  "modify_messages": true,
+  "network_permalink": "yammer-inc.com",
+  "view_members": true,
+  "view_tags": true,
+  "network_id": 155465488,
+  "user_id": 1014216,
+  "view_groups": true,
+  "token": "abcdefghijklmn",
+  "network_name": "Yammer",
+  "view_messages": true,
+  "created_at": "2011/04/06 16:25:46 +0000"
 }
 ```
 
-Set the OAuth token on your app. Example:
+Set the OAuth token when creating a Yam instance. For example:
 
 ```ruby
-Yam.configure do |config|
-  config.oauth_token = your_oauth_token
-end
-```
-
-Rails Configuration
--------------------
-
-Retrieve your access token using the steps outlined in the <a href="#general-configuration">general configuration</a> section above.
-
-Add the following to a `yammer.rb` file in your `config/initializers` directory:
-
-```ruby
-Yam.configure do |config|
-  config.oauth_token = oauth_token
-end
+access_token = 'abcdefghijklmn'
+yammer_endpoint = 'https://www.yammer.com/api/v1/'
+yam = Yam.new(access_token, yammer_endpoint)
 ```
 
 Set up Yammer OAuth 2.0
@@ -106,40 +93,46 @@ href="#general-configuration">general configuration</a> section for instructions
 
 For a list of all Yammer API endpoints, see the <a href="http://developer.yammer.com/restapi/">REST API documentation</a>.
 
+Wherever you like, create an instance of the Yam client (optionally, memoized it for reuse):
+
+yam ||= Yam.new('abcdefghijklmn', 'https://www.yammer.com/api/v1/')
+
+Call methods on the instance like so:
+
 **Find a Yammer user by email**
 
 ```ruby
-Yam.get('/users/by_email', email: 'user@example.com')
+yam.get('/users/by_email', email: 'user@example.com')
 ```
 
 **Find a Yammer user by the Yammer user id**
 
 ```ruby
-Yam.get('/users/123456')
+yam.get('/users/123456')
 ```
 
 **Post a status update from the current user**
 
 ```ruby
-Yam.post('/messages', body: 'status update')
+yam.post('/messages', body: 'status update')
 ```
 
 **Send a private message to another Yammer user**
 
 ```ruby
-Yam.post('/messages', body: 'this is a private message', direct_to_id: 123456)
+yam.post('/messages', body: 'this is a private message', direct_to_id: 123456)
 ```
 
 **Send a private message to a Yammer group**
 
 ```ruby
-Yam.post('/messages', body: 'this is a group message', group_id: 987654)
+yam.post('/messages', body: 'this is a group message', group_id: 987654)
 ```
 
 **Send a message with an Open Graph Object as an attachment**
 
 ```ruby
-Yam.post('/messages', :body: 'here is my open graph object', og_url: "https://www.yammer.com/example/graph/123456789")
+yam.post('/messages', :body: 'here is my open graph object', og_url: "https://www.yammer.com/example/graph/123456789")
 ```
 
 Contributing
