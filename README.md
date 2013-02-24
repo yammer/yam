@@ -1,7 +1,9 @@
 Yam
 ===
 
+[![Code Climate](https://codeclimate.com/github/yammer/yam.png)](https://codeclimate.com/github/yammer/yam)
 [![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)](https://travis-ci.org/yammer/yam)
+
 
 The official Yammer Ruby gem.
 
