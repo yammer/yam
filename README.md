@@ -93,9 +93,11 @@ href="#general-configuration">general configuration</a> section for instructions
 
 For a list of all Yammer API endpoints, see the <a href="http://developer.yammer.com/restapi/">REST API documentation</a>.
 
-Wherever you like, create an instance of the Yam client (optionally, memoized it for reuse):
+Wherever you like, create an instance of the Yam client (optionally, memoize it for reuse):
 
+```ruby
 yam ||= Yam.new('abcdefghijklmn', 'https://www.yammer.com/api/v1/')
+```
 
 Call methods on the instance like so:
 
