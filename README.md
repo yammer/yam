@@ -80,10 +80,11 @@ yammer_endpoint = 'https://www.yammer.com/api/v1/'
 yam = Yam.new(access_token, yammer_endpoint)
 ```
 
-Set up Yammer OAuth 2.0
------------------------
+Setup Yammer Authentication
+---------------------------
 
-See Yammer's Developer Guide for step-by-step instructions on setting up OAuth 2.0: <http://developer.yammer.com/files/2012/10/PlatformDeveloperGuide.pdf>
+Setup Yammer OAuth authentication in your app as laid out in [Build your first Yammer App](https://developer.yammer.com/introduction/).
+
 
 Usage Examples
 --------------
