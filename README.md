@@ -1,14 +1,12 @@
-Yammer Client
+Yam
 =============
-[![GemVersion](https://badge.fury.io/rb/yammer-client.png)][gemversion]
-[![Build Status](https://travis-ci.org/tiabas/yammer-client.png?branch=master)][travis]
-[![Coverage Status](https://coveralls.io/repos/tiabas/yammer-client/badge.png?branch=master)][coveralls]
-[![Dependency Status](https://gemnasium.com/tiabas/yammer-client.png)][gemnasium]
+[![Gem Version](https://badge.fury.io/rb/yam.png)](http://badge.fury.io/rb/yam)
+[![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)][travis]
+[![Coverage Status](https://coveralls.io/repos/yammer/yam/badge.png)](https://coveralls.io/r/yammer/yam)
 
-[gemversion]: (http://badge.fury.io/rb/yammer-client)
-[travis]: (https://travis-ci.org/tiabas/yammer-client)
-[coveralls]: (https://coveralls.io/r/tiabas/yammer-client)
-[gemnasium]: https://gemnasium.com/tiabas/yammer-client
+[gemversion]: (http://badge.fury.io/rb/yam)
+[travis]: (https://travis-ci.org/yammer/yam)
+[coveralls]: (https://coveralls.io/r/yammer/yam)
 
 A Yammer Ruby gem
 
@@ -16,9 +14,9 @@ A Yammer Ruby gem
 
 This README provides only a basic overview of how to use this gem.For more information about the API endpoints and helper methods available, look at the rdoc documentation.
 
-[http://rdoc.info/github/tiabas/yammer-client][documentation]
+[http://rdoc.info/github/yammer/yam][documentation]
 
-[documentation]: http://rdoc.info/github/tiabas/yammer-client/index 
+[documentation]: http://rdoc.info/github/yammer/yam/index 
 
 
 ## Installation
