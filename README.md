@@ -26,7 +26,7 @@ This README provides only a basic overview of how to use this gem.For more infor
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'yammer-client'
+gem 'yam'
 ```
 
 And then execute:
@@ -38,7 +38,7 @@ $ bundle
 Or install it yourself as:
 
 ```sh
-$ gem install yammer-client
+$ gem install yam
 ```
 
 ## Configuration
