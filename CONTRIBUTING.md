@@ -81,10 +81,3 @@ Syntax
 * Follow the conventions you see used in the source already.
 
 And in case we didn't emphasize it enough: we love tests!
-
-
-Development process
--------------------
-
-For details and screenshots of the feature branch code review process,
-read [this blog post](http://robots.thoughtbot.com/post/2831837714/feature-branch-code-reviews).

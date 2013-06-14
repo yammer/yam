@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 # Copyright (c) Microsoft Corporation
 # All rights reserved.
 #
@@ -16,33 +18,56 @@
 # permissions and limitations under the License.
 
 require 'simplecov'
+require 'coveralls'
 
-SimpleCov.start do
-  add_filter 'spec'
-end
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+      Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start
 
-require 'bourne'
+require 'yammer'
 require 'rspec'
+require 'rspec/autorun'
 require 'webmock/rspec'
-require 'yam'
 
-ENDPOINT = Yam::Configuration::DEFAULT_API_ENDPOINT
+WebMock.disable_net_connect!(:allow => 'coveralls.io')
 
 RSpec.configure do |config|
-  config.mock_with :mocha
-  config.include WebMock::API
-  config.order = :rand
-  config.color_enabled = true
-
-  config.before(:each) do
-    Yam.set_defaults
+  config.mock_with :rspec
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
   end
+end
+
+def stub_delete(path='')
+  stub_request(:delete, "https://www.yammer.com#{path}")
+end
+
+def stub_get(path='')
+  stub_request(:get, "https://www.yammer.com#{path}")
+end
+
+def stub_post(path='')
+  stub_request(:post, "https://www.yammer.com#{path}")
+end
+
+def stub_put(path='')
+  stub_request(:put, "https://www.yammer.com#{path}")
 end
 
 def fixture_path
   File.expand_path("../fixtures", __FILE__)
 end
 
+def mock_path
+  File.expand_path("../mocks", __FILE__)
+end
+
 def fixture(file)
-  File.new(File.join(fixture_path, '/', file))
+  File.new("#{fixture_path}/#{file}")
+end
+
+def upload(file)
+  File.new("#{mock_path}/#{file}")
 end

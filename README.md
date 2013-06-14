@@ -1,21 +1,32 @@
-Yam
-===
+Yammer Client
+=============
+[![GemVersion](https://badge.fury.io/rb/yammer-client.png)][gemversion]
+[![Build Status](https://travis-ci.org/tiabas/yammer-client.png?branch=master)][travis]
+[![Coverage Status](https://coveralls.io/repos/tiabas/yammer-client/badge.png?branch=master)][coveralls]
+[![Dependency Status](https://gemnasium.com/tiabas/yammer-client.png)][gemnasium]
 
-[![Code Climate](https://codeclimate.com/github/yammer/yam.png)](https://codeclimate.com/github/yammer/yam)
-[![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)](https://travis-ci.org/yammer/yam)
+[gemversion]: (http://badge.fury.io/rb/yammer-client)
+[travis]: (https://travis-ci.org/tiabas/yammer-client)
+[coveralls]: (https://coveralls.io/r/tiabas/yammer-client)
+[gemnasium]: https://gemnasium.com/tiabas/yammer-client
+
+A Yammer Ruby gem
+
+## Documentation
+
+This README provides only a basic overview of how to use this gem.For more information about the API endpoints and helper methods available, look at the rdoc documentation.
+
+[http://rdoc.info/github/tiabas/yammer-client][documentation]
+
+[documentation]: http://rdoc.info/github/tiabas/yammer-client/index 
 
 
-The official Yammer Ruby gem.
-
-NOTE: Currently in alpha - use at your own risk
-
-Installation
-------------
+## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'yam'
+gem 'yammer-client'
 ```
 
 And then execute:
@@ -27,30 +38,28 @@ $ bundle
 Or install it yourself as:
 
 ```sh
-$ gem install yam
+$ gem install yammer-client
 ```
 
-General Configuration
----------------------
+## Configuration
 
-The Yammer API requires you to authenticate via OAuth, so you'll need to register your Yammer application. To register a new application, sign in to Yammer and then fill out the form at https://www.yammer.com/client_applications.
+The Yammer API requires authentication for access to certain endpoints. Below are the basic steps to get this done.
 
-If you already have your access token, you can skip this section.
+### Register your application
 
-To retrieve your access token, follow these steps.
+Setup a Yammer client application as described in [Build your first Yammer App](https://developer.yammer.com/introduction/)
 
-1. Construct the following URL using the client_id you received after registering your app with Yammer: <https://www.yammer.com/dialog/oauth?client_id=[:client_id]>
+### Obtaining an access token
 
-2. Follow the URL you constructed above. It will take you to a Yammer OAuth dialog. Click the "Allow" button.
+1. Construct the following URL using the client_id you received `https://www.yammer.com/dialog/oauth?client_id=[:client_id]`
 
-3. You will be redirected to a URL that looks something like this: <http://[:redirect_uri]?code=[:code]>
+2. Have your users follow the URL you constructed above to allow your application to access their data 
 
-4. Use the code from step 3 along with your client_id and client_secret (obtained when registering your app) to construct the following URL:
-<https://www.yammer.com/oauth2/access_token.json?client_id=[:client_id]&client_secret=[:client_secret]&code=[:code]>
+3. After allowing access, your users will be redirected to your callback URL `http://[:redirect_uri]?code=[:code]`
 
-5. The authorization server will return an access token object as part of a broader response that includes user profile information.
+4. Exchange the code for an access token by making an HTTP GET request to `https://www.yammer.com/oauth2/access_token.json?client_id=[:client_id]&client_secret=[:client_secret]&code=[:code]`
 
-Sample access token (token is 'abcdefghijklmn' in this example) as part of response:
+5. The authorization server will respond with an access token
 
 ```
 "access_token": {
@@ -72,72 +81,191 @@ Sample access token (token is 'abcdefghijklmn' in this example) as part of respo
 }
 ```
 
-Set the OAuth token when creating a Yam instance. For example:
+### Configuring yammer-client
+
+To view the current state of the client use the `options` method
 
 ```ruby
-access_token = 'abcdefghijklmn'
-yammer_endpoint = 'https://www.yammer.com/api/v1/'
-yam = Yam.new(access_token, yammer_endpoint)
+require 'yammer'
+
+Yammer.options
+#> {:site_url=>"https://www.yammer.com", :client_id=>nil, :client_secret=>nil, :access_token=>nil, :http_adapter=>Yammer::Connection, :connection_options=>{:max_redirects=>5, :use_ssl=>true}} 
 ```
 
-Set up Yammer OAuth 2.0
------------------------
-
-See Yammer's Developer Guide for step-by-step instructions on setting up OAuth 2.0: <http://developer.yammer.com/files/2012/10/PlatformDeveloperGuide.pdf>
-
-Usage Examples
---------------
-
-All examples require an authenticated Yammer client. See the <a
-href="#general-configuration">general configuration</a> section for instructions for finding and setting your access token.
-
-For a list of all Yammer API endpoints, see the <a href="http://developer.yammer.com/restapi/">REST API documentation</a>.
-
-Wherever you like, create an instance of the Yam client (optionally, memoize it for reuse):
+You may change this configuration by using the `configure` method
 
 ```ruby
-yam ||= Yam.new('abcdefghijklmn', 'https://www.yammer.com/api/v1/')
+Yammer.configure do |c|
+  c.client_id = '[client_id]'
+  c.client_secret = '[client_secret]'
+  c.token = '[access_token]'
+end
+#> Yammer 
 ```
 
-Call methods on the instance like so:
-
-**Find a Yammer user by email**
+At this point, your new settings will take effect
 
 ```ruby
-yam.get('/users/by_email', email: 'user@example.com')
+Yammer.options
+#> {:site_url=>"https://www.yammer.com", :client_id=>'[client_id]', :client_secret=>'[client_secret]', :access_token=>'[access_token]', :http_adapter=>Yammer::Connection, :connection_options=>{ :max_redirects=>5, :use_ssl=>true }} 
 ```
 
-**Find a Yammer user by the Yammer user id**
+## Usage
+
+ `yammer-client` provides two ways to access Yammer's API. One of these ways is by using HTTP helper methods on and instance of `Yammer::Client`. The other 
+ way is using methods on the object models that come bundled with this gem.
+
+### Using the client
+
+1. Create an instance of the Yammer client
 
 ```ruby
-yam.get('/users/123456')
+yamr = Yammer::Client.new(
+        :client_id     => 'vAbMcg9qjgKsp4jjpm1pw',
+        :client_secret => 'Wn0kp7Lu0TCY4GtZWkmSsqGErg10DmMADyjWkf2U',
+        :access_token  => 'HqsKG3ka9Uls2DxahNi78A'
+      )
 ```
 
-**Post a status update from the current user**
+2. Call methods on the instance:
+
+**User**
+
+*find a user by email*
 
 ```ruby
-yam.post('/messages', body: 'status update')
+yamr.get_user_by_email('user@example.com')
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
 ```
 
-**Send a private message to another Yammer user**
+*find a user by user id*
 
 ```ruby
-yam.post('/messages', body: 'this is a private message', direct_to_id: 123456)
+yamr.get_user('1588')
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
 ```
 
-**Send a private message to a Yammer group**
+*get the current user*
 
 ```ruby
-yam.post('/messages', body: 'this is a group message', group_id: 987654)
+yamr.current_user
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
 ```
 
-**Send a message with an Open Graph Object as an attachment**
+
+**Message**
+
+*post a update as the current user*
 
 ```ruby
-yam.post('/messages', :body: 'here is my open graph object', og_url: "https://www.yammer.com/example/graph/123456789")
+yamr.create_message('status update')
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
 ```
 
-Contributing
-------------
+*send a private message to another Yammer user*
 
-To contribute to this project, see the [CONTRIBUTING.md](https://github.com/yammer/yam/blob/master/CONTRIBUTING.md) file.
+```ruby
+yamr.create_message('private message', :direct_to_id => 24)
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+```
+
+*send a message with an Open Graph Object as an attachment*
+
+```ruby
+yamr.create_message('here is my open graph object', :og_url => "https://www.yammer.com/example/graph/31415926")
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+```
+
+
+**Search**
+
+*search for a term within the context of current user*
+
+```ruby
+yamr.search(:search => 'thekev', :model_types => 'users;groups')
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+```
+
+**Thread**
+
+*fetch a thread with a given id*
+
+```ruby
+yamr.get_thread(42)
+#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+```
+
+
+### Using the object models (Experimental)
+
+The object model is an abstraction that makes it easy to manipulate the JSON data return when accessing Yammer's API. Each model has accessor methods for all keys contained in the JSON response for a given model type. 
+
+
+**User**
+
+*get the current user*
+
+
+```ruby
+u = Yammer::User.current
+#> <Yammer::User:0x007f9f4b0c39c8>
+
+u.full_name
+#> 'Kevin Mutyaba'
+
+u.update!(:job_title => 'k0dR')
+```
+
+
+**Thread**
+
+*fetch a thread with a given id*
+
+```ruby
+t = Yammer::Thread.get(3)
+```
+
+View the participants in the thread
+
+```ruby
+parts = t.participants
+#> [{:type=>"user", :id=>18}, {:type=>"user", :id=>64}]
+```
+
+View the participants in the thread as user object models
+
+```ruby
+peepl = t.people
+#> [#<Yammer::User:0x007f9f4c086630 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>, #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=64>] 
+```
+
+Object models are lazyly loaded. Calling an accessor on a model will hydrate it
+
+```ruby
+peepl[0]
+#> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=18> 
+
+peepl[0].permalink
+#> 'thekev'
+
+peepl[0]
+#=> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={:last_name=>"Mutyaba", :network_id=>1, :first_name=>"Kevin", :id => 18,  :permalink=>"thekev" }, @network_id=1, @first_name="Kev", @full_name="Tiaba", @permalink="thekev", @id=18 > 
+```
+
+## Supported Ruby Versions
+This library aims to support and is [tested against][travis] the following Ruby
+version:
+
+* Ruby 1.8.7
+* Ruby 1.9.2
+* Ruby 1.9.3
+* Ruby 2.0.0
+
+This library may inadvertently work (or seem to work) on other Ruby
+implementations, however support will only be provided for the versions listed
+above.
+
+## Copyright
+Copyright (c) 2013 Microsoft Corporation
+See [LICENSE][license] for details.
+[license]: https://github.com/tiabas/yammer-client/blob/master/LICENSE.md

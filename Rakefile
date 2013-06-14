@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 # Copyright (c) Microsoft Corporation
 # All rights reserved.
 #
@@ -14,10 +16,14 @@
 #
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
-#
-require 'bundler/gem_tasks'
+
+require 'rake'
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.verbose = true
+end
 
+desc "Run spec"
 task :default => :spec
+task :test    => :spec
