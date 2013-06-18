@@ -116,14 +116,14 @@ describe Yammer::Client do
   describe "#connection_options" do
     context "with default connection options" do
       it "returns empty hash" do
-        expect(subject.connection_options).to eq ({ :max_redirects => 5, :use_ssl => true })
+        expect(subject.connection_options).to eq({ :max_redirects => 5, :use_ssl => true })
       end
     end
 
     context "with custom connection options" do
       it "returns default options" do
         subject.connection_options = { :max_redirects => 5, :use_ssl => true }
-        expect(subject.connection_options).to eq ({:max_redirects => 5, :use_ssl => true})
+        expect(subject.connection_options).to eq({:max_redirects => 5, :use_ssl => true})
       end
     end
   end
@@ -249,7 +249,7 @@ describe Yammer::Client do
           }
         ).to_return(:status => 301, :body => "", :headers => { 'Location' => 'https://www.yammer.com/members'})
 
- 
+
        stub_request(:get, "https://www.yammer.com/members").
          with(
           :headers => {
@@ -347,7 +347,7 @@ describe Yammer::Client do
           :body => '{ "response": { "message": "Token not found.", "code": 16, "stat": "fail" } }',
           :status => 401)
 
-        expect(subject.get('/users/1')).to eq ('{ "response": { "message": "Token not found.", "code": 16, "stat": "fail" } }')
+        expect(subject.get('/users/1')).to eq('{ "response": { "message": "Token not found.", "code": 16, "stat": "fail" } }')
       end
     end
 
@@ -357,7 +357,7 @@ describe Yammer::Client do
           :body => '{ "response": { "message": "Rate limited due to excessive requests.", "code": 33, "stat": "fail" } }',
           :status => 429
         )
-        expect(subject.get('/users/1')).to eq ('{ "response": { "message": "Rate limited due to excessive requests.", "code": 33, "stat": "fail" } }')
+        expect(subject.get('/users/1')).to eq('{ "response": { "message": "Rate limited due to excessive requests.", "code": 33, "stat": "fail" } }')
       end
     end
   end
