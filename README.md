@@ -1,12 +1,15 @@
 Yam
 =============
-[![Gem Version](https://badge.fury.io/rb/yam.png)](http://badge.fury.io/rb/yam)
-[![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)][travis]
-[![Coverage Status](https://coveralls.io/repos/yammer/yam/badge.png)](https://coveralls.io/r/yammer/yam)
-
 [gemversion]: (http://badge.fury.io/rb/yam)
 [travis]: (https://travis-ci.org/yammer/yam)
 [coveralls]: (https://coveralls.io/r/yammer/yam)
+[codeclimate]: (https://codeclimate.com/github/yammer/yam)
+
+[![Gem Version](https://badge.fury.io/rb/yam.png)][gemversion]
+[![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)][travis]
+[![Coverage Status](https://coveralls.io/repos/yammer/yam/badge.png)][coveralls]
+[![Code Climate](https://codeclimate.com/github/yammer/yam.png)][codeclimate]
+
 
 A Yammer Ruby gem
 
