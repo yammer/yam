@@ -25,8 +25,9 @@ Gem::Specification.new do |s|
   s.name             = 'yam'
   s.version          = Yammer::Version
 
-  s.date             = %q{2013-06-13}
-  s.summary          = "The official Yammer Ruby gem"
+  s.date             = %q{2013-06-25}
+  s.summary          = "Yammer API Client"
+
   s.description      = "A Ruby wrapper for accessing Yammer's REST API"
   s.authors          = ["Kevin Mutyaba"]
   s.email            = %q{kmutyaba@yammer-inc.com}

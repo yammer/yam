@@ -95,102 +95,115 @@ You may change this configuration by using the `configure` method
 Yammer.configure do |c|
   c.client_id = '[client_id]'
   c.client_secret = '[client_secret]'
-  c.token = '[access_token]'
 end
 #> Yammer 
 ```
 
-At this point, your new settings will take effect
+At this point, your new settings will take effect.
 
 ```ruby
 Yammer.options
-#> {:site_url=>"https://www.yammer.com", :client_id=>'[client_id]', :client_secret=>'[client_secret]', :access_token=>'[access_token]', :http_adapter=>Yammer::Connection, :connection_options=>{ :max_redirects=>5, :use_ssl=>true }} 
+#> {:site_url=>"https://www.yammer.com", :client_id=>'[client_id]', :client_secret=>'[client_secret]', :access_token=>nil, :http_adapter=>Yammer::Connection, :connection_options=>{ :max_redirects=>5, :use_ssl=>true }} 
 ```
+Take note of the fact that the `access_token` is nil. This will need to be set and, in the next section, we will see how to do this.
 
 ## Usage
 
- `yammer-client` provides two ways to access Yammer's API. One of these ways is by using HTTP helper methods on and instance of `Yammer::Client`. The other 
- way is using methods on the object models that come bundled with this gem.
+- This gem offers three ways to interact Yammer's API:
+  - Calling methods on the Yammer i.e `Yammer`
+  - Calling methods on an instance of `Yammer::Client`.
+  - Calling methos on the custom object models (Experimental)
 
-### Using the client
+# Calling methods on the Yammer module 
+In order for this to work, you will need to set up your access_token. This assumes that you already configured the client with your default options as was described above.
 
-1. Create an instance of the Yammer client
+ ```ruby
+# set up your access token
+Yammer.configure do |c|
+  c.access_token = '[access_token]'
+end
+#=> <Yammer: {:http_adapter=>Yammer::HttpAdapter, :client_secret=>"[client_secret]", :access_token=>"[access_token]", :site_url=>"https://www.yammer.com", :connection_options=>{:max_redirects=>5, :verify_ssl=>true}, :default_headers=>{"Accept"=>"application/json", "User-Agent"=>"Yammer Ruby Gem 0.1.8"}, :client_id=>"[client_id]"}>
 
-```ruby
-yamr = Yammer::Client.new(
-        :client_id     => 'vAbMcg9qjgKsp4jjpm1pw',
-        :client_secret => 'Wn0kp7Lu0TCY4GtZWkmSsqGErg10DmMADyjWkf2U',
-        :access_token  => 'HqsKG3ka9Uls2DxahNi78A'
-      )
+# get the current user 
+Yammer.current_user
 ```
 
-2. Call methods on the instance:
+### Calling methods on an instance of Yammer::Client
+    Use this if you wish to create multiple client instances for different users each of whom will have different access tokens.
 
-**User**
-
-*find a user by email*
-
-```ruby
-yamr.get_user_by_email('user@example.com')
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
-```
-
-*find a user by user id*
+- Create an instance of the Yammer client
 
 ```ruby
-yamr.get_user('1588')
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+# creates a client instance for the access token: HqsKG3ka9Uls2DxahNi78A
+yamr = Yammer::Client.new(:access_token  => 'HqsKG3ka9Uls2DxahNi78A')
 ```
 
-*get the current user*
+- Call methods on the instance:
 
-```ruby
-yamr.current_user
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
-```
+  - **User**
+
+    - *find a user by email*
+
+    ```ruby
+    yamr.get_user_by_email('user@example.com')
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
+
+    - *find a user by user id*
+
+    ```ruby
+    yamr.get_user('1588')
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
+
+    - *get the current user*
+
+    ```ruby
+    yamr.current_user
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
+
+  - **Message**
+
+    - *post a update as the current user*
+
+    ```ruby
+    yamr.create_message('status update')
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
+
+    - *send a private message to another Yammer user*
+
+    ```ruby
+    yamr.create_message('private message', :direct_to_id => 24)
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
+
+    - *send a message with an Open Graph Object as an attachment*
+
+    ```ruby
+    yamr.create_message('here is my open graph object', :og_url => "https://www.yammer.com/example/graph/31415926")
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
 
 
-**Message**
+  - **Search**
 
-*post a update as the current user*
+    - *search for a term within the context of current user*
 
-```ruby
-yamr.create_message('status update')
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
-```
+    ```ruby
+    yamr.search(:search => 'thekev', :model_types => 'users;groups')
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
 
-*send a private message to another Yammer user*
+  - **Thread**
 
-```ruby
-yamr.create_message('private message', :direct_to_id => 24)
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
-```
+    - *fetch a thread with a given id*
 
-*send a message with an Open Graph Object as an attachment*
-
-```ruby
-yamr.create_message('here is my open graph object', :og_url => "https://www.yammer.com/example/graph/31415926")
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
-```
-
-
-**Search**
-
-*search for a term within the context of current user*
-
-```ruby
-yamr.search(:search => 'thekev', :model_types => 'users;groups')
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
-```
-
-**Thread**
-
-*fetch a thread with a given id*
-
-```ruby
-yamr.get_thread(42)
-#<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
-```
+    ```ruby
+    yamr.get_thread(42)
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
 
 
 ### Using the object models (Experimental)
@@ -198,56 +211,56 @@ yamr.get_thread(42)
 The object model is an abstraction that makes it easy to manipulate the JSON data return when accessing Yammer's API. Each model has accessor methods for all keys contained in the JSON response for a given model type. 
 
 
-**User**
+  - **User**
 
-*get the current user*
-
-
-```ruby
-u = Yammer::User.current
-#> <Yammer::User:0x007f9f4b0c39c8>
-
-u.full_name
-#> 'Kevin Mutyaba'
-
-u.update!(:job_title => 'k0dR')
-```
+    - *get the current user*
 
 
-**Thread**
+    ```ruby
+    u = Yammer::User.current
+    #> <Yammer::User:0x007f9f4b0c39c8>
 
-*fetch a thread with a given id*
+    u.full_name
+    #> 'Kevin Mutyaba'
 
-```ruby
-t = Yammer::Thread.get(3)
-```
+    u.update!(:job_title => 'k0dR')
+    ```
 
-View the participants in the thread
 
-```ruby
-parts = t.participants
-#> [{:type=>"user", :id=>18}, {:type=>"user", :id=>64}]
-```
+  - **Thread**
 
-View the participants in the thread as user object models
+    - *fetch a thread with a given id*
 
-```ruby
-peepl = t.people
-#> [#<Yammer::User:0x007f9f4c086630 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>, #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=64>] 
-```
+    ```ruby
+    t = Yammer::Thread.get(3)
+    ```
 
-Object models are lazyly loaded. Calling an accessor on a model will hydrate it
+    View the participants in the thread
 
-```ruby
-peepl[0]
-#> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=18> 
+    ```ruby
+    parts = t.participants
+    #> [{:type=>"user", :id=>18}, {:type=>"user", :id=>64}]
+    ```
 
-peepl[0].permalink
-#> 'thekev'
+    View the participants in the thread as user object models
 
-peepl[0]
-#=> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={:last_name=>"Mutyaba", :network_id=>1, :first_name=>"Kevin", :id => 18,  :permalink=>"thekev" }, @network_id=1, @first_name="Kev", @full_name="Tiaba", @permalink="thekev", @id=18 > 
-```
+    ```ruby
+    peepl = t.people
+    #> [#<Yammer::User:0x007f9f4c086630 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>, #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=64>] 
+    ```
+
+    Object models are lazyly loaded. Calling an accessor on a model will hydrate it
+
+    ```ruby
+    peepl[0]
+    #> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=18> 
+
+    peepl[0].permalink
+    #> 'thekev'
+
+    peepl[0]
+    #=> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={:last_name=>"Mutyaba", :network_id=>1, :first_name=>"Kevin", :id => 18,  :permalink=>"thekev" }, @network_id=1, @first_name="Kev", @full_name="Tiaba", @permalink="thekev", @id=18 > 
+    ```
 
 ## Supported Ruby Versions
 This library aims to support and is [tested against][travis] the following Ruby
