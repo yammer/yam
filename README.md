@@ -44,7 +44,7 @@ The Yammer API requires authentication for access to certain endpoints. Below ar
 
 ### Register your application
 
-Setup a Yammer client application as described in [Build your first Yammer App](https://developer.yammer.com/introduction/)
+Setup a Yammer client application as described on the [Yammer Developer site](https://developer.yammer.com/introduction/)
 
 ### Obtaining an access token
 
@@ -58,23 +58,11 @@ Setup a Yammer client application as described in [Build your first Yammer App](
 
 5. The authorization server will respond with an access token
 
-```
+```ruby
 "access_token": {
-  "view_subscriptions": true,
-  "expires_at": null,
-  authorized_at": "2011/04/06 16:25:46 +0000",
-  "modify_subscriptions": true,
-  "modify_messages": true,
-  "network_permalink": "yammer-inc.com",
-  "view_members": true,
-  "view_tags": true,
-  "network_id": 155465488,
-  "user_id": 1014216,
-  "view_groups": true,
-  "token": "abcdefghijklmn",
-  "network_name": "Yammer",
-  "view_messages": true,
-  "created_at": "2011/04/06 16:25:46 +0000"
+  ...
+  "token": "abcxyz12345",
+  ...
 }
 ```
 

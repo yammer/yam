@@ -44,4 +44,7 @@ module Yammer
     end
   end
 end
+
+Yam = Yammer
+
 Yammer.reset!
