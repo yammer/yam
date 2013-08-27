@@ -196,6 +196,32 @@ module Yammer
       end
 
       # @see https://developer.yammer.com/restapi/#rest-messages
+      # @api_path /api/v1/messages/liked_by/current.json?message_id=[:id]
+      # @rate_limited Yes
+      # @authentication Requires user context
+      # @raise  [Yammer::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Yammer::ApiResponse]
+      # @param id [Integer] the ID of the message for which you want the current user to mark as liked
+      # @example Marks the specified message as liked by the current user
+      #   msgs = Yammer.like_message(10)
+      def like_message(id)
+        post("/api/v1/messages/liked_by/current.json?message_id=#{id}", {})
+      end
+
+      # @see https://developer.yammer.com/restapi/#rest-messages
+      # @api_path /api/v1/messages/liked_by/current.json?message_id=[:id]
+      # @rate_limited Yes
+      # @authentication Requires user context
+      # @raise  [Yammer::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Yammer::ApiResponse]
+      # @param id [Integer] the ID of the message for which you want the current user to remove the like mark
+      # @example Removes the like mark on the specified message for the current user
+      #   msgs = Yammer.like_message(10)
+      def unlike_message(id)
+        delete("/api/v1/messages/liked_by/current.json?message_id=#{id}", {})
+      end
+
+      # @see https://developer.yammer.com/restapi/#rest-messages
       # @api_path /api/v1/messages
       # @rate_limited Yes
       # @authentication Requires user context

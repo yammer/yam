@@ -127,6 +127,20 @@ describe Yammer::Api::Message do
     end
   end
 
+  describe '#like_message' do
+    it 'should like the message as a the specified user' do
+      subject.should_receive(:post).with('/api/v1/messages/liked_by/current.json?message_id=97', {})
+      subject.like_message(97)
+    end
+  end
+
+  describe '#unlike_message' do
+    it 'should unlike the message as a the specified user' do
+      subject.should_receive(:delete).with('/api/v1/messages/liked_by/current.json?message_id=97', {})
+      subject.unlike_message(97)
+    end
+  end
+
   describe '#messages_in_thread' do
     it 'should fetch messages in thread' do
       subject.should_receive(:get).with('/api/v1/messages/in_thread/97', {})
