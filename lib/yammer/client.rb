@@ -35,6 +35,7 @@ module Yammer
     include Yammer::Api::PendingAttachment
     include Yammer::Api::Subscription
     include Yammer::Api::OpenGraphObject
+    include Yammer::Api::Activity
 
     attr_reader :site_url, :default_headers, :connection_options
 
