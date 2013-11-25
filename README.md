@@ -100,7 +100,7 @@ Take note of the fact that the `access_token` is nil. This will need to be set a
 - This gem offers three ways to interact Yammer's API:
   - Calling methods on the Yammer i.e `Yammer`
   - Calling methods on an instance of `Yammer::Client`.
-  - Calling methos on the custom object models (Experimental)
+  - Calling methods on the custom object models (Experimental)
 
 ### Calling methods on the Yammer module 
 In order for this to work, you will need to set up your access_token. This assumes that you already configured the client with your default options as was described above.
