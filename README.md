@@ -7,7 +7,7 @@ Yam
 [![Code Climate](https://codeclimate.com/github/yammer/yam.png)](https://codeclimate.com/github/yammer/yam)
 
 
-A Yammer Ruby gem
+The Yammer Ruby gem
 
 ## Documentation
 
