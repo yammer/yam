@@ -288,7 +288,6 @@ The object model is an abstraction that makes it easy to manipulate the JSON dat
 This library aims to support and is [tested against][travis] the following Ruby
 version:
 
-* Ruby 1.8.7
 * Ruby 1.9.2
 * Ruby 1.9.3
 * Ruby 2.0.0
