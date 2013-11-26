@@ -117,13 +117,21 @@ Yammer.current_user
 ```
 
 ### Calling methods on an instance of Yammer::Client
-    Use this if you wish to create multiple client instances for different users each of whom will have different access tokens.
+NOTE: Use this if you wish to create multiple client instances with diffrent client_id, client_secret and access token.
+If your application uses a signle pair of client_id and client_secret credentials, you ONLY need to sepecify the access token 
 
 - Create an instance of the Yammer client
 
 ```ruby
-# creates a client instance for the access token: HqsKG3ka9Uls2DxahNi78A
+# create a client instance using the access token: HqsKG3ka9Uls2DxahNi78A
 yamr = Yammer::Client.new(:access_token  => 'HqsKG3ka9Uls2DxahNi78A')
+
+
+# create multiple clients, each using a different access token
+client1 = Yammer::Client.new(:access_token  => 'fG4mhFDf2GUUptztU0Qo9g')
+
+client2 = Yammer::Client.new(:access_token  => 'ruZy4vFYyTWqnx7adO9ow')
+
 ```
 
 - Call methods on the instance:
