@@ -1,3 +1,9 @@
+1.1.0
+====================================
+- added support for activity api
+- added support for liking and unliking messages
+- small improvements to documentation
+
 1.0.0
 ====================================
 - Customized fork of yammer-client (https://github.com/tiabas/yammer-client)
