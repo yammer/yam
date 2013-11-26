@@ -112,7 +112,7 @@ Yammer.configure do |c|
 end
 #=> <Yammer: {:http_adapter=>Yammer::HttpAdapter, :client_secret=>"[client_secret]", :access_token=>"[access_token]", :site_url=>"https://www.yammer.com", :connection_options=>{:max_redirects=>5, :verify_ssl=>true}, :default_headers=>{"Accept"=>"application/json", "User-Agent"=>"Yammer Ruby Gem 0.1.8"}, :client_id=>"[client_id]"}>
 
-# get the current user 
+# get the current user
 Yammer.current_user
 ```
 
@@ -190,6 +190,32 @@ yamr = Yammer::Client.new(:access_token  => 'HqsKG3ka9Uls2DxahNi78A')
 
     ```ruby
     yamr.get_thread(42)
+    #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
+    ```
+
+  - **Activity**
+
+    - *create and post an activity*
+
+    ```ruby
+    yamr.create_activity(
+      activity: {
+        actor: {
+          name: 'John Doe',
+          email: 'jdoe@yammer-inc.com'
+        },
+        action: 'create',
+        object: {
+          url: 'www.example.com',
+          title: 'Example event name',
+        },
+        message: 'Posting activity',
+        users: [{
+          name: 'Example Invitee',
+          email: 'example@yammer-inc.com'
+        }]
+      }
+    )
     #<Yammer::ApiResponse:0x007fb949434ec8 @headers=#<Net::HTTPOK 200 OK readbody=true>, @body="[JSON Response]", @code=200>
     ```
 

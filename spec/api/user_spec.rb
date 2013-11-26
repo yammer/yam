@@ -25,38 +25,38 @@ describe Yammer::Api::User do
   before :all do
     @client = Yammer::Client.new(
       :site_url     => 'https://yammer.com',
-      :client_id     => "PRbTcg9qjgKsp4jjpm1pw",
-      :client_secret => "Xn7kp7Ly0TCY4GtZWkmSsqGEPg10DmMADyjWkf2U",
-      :access_token  => "TolNOFka9Uls2DxahNi78A"
+      :client_id     => 'PRbTcg9qjgKsp4jjpm1pw',
+      :client_secret => 'Xn7kp7Ly0TCY4GtZWkmSsqGEPg10DmMADyjWkf2U',
+      :access_token  => 'TolNOFka9Uls2DxahNi78A'
     )
   end
 
   subject { @client }
 
-  describe "users" do
-    it "makes an http request" do
+  describe 'all_users' do
+    it 'makes an http request' do
       @client.should_receive(:get).with('/api/v1/users', { :page => 1, :letter => 'm' })
       @client.all_users({:page => 1, :letter => 'm'})
     end
   end
 
-  describe "create_user" do
-    it "makes an http request" do
+  describe 'create_user' do
+    it 'makes an http request' do
       params = {:first_name => 'john', :last_name => 'doe', :email => 'jdoe@yammer-inc.com'}
       @client.should_receive(:post).with('/api/v1/users', params)
       @client.create_user(params)
     end
   end
 
-  describe "get_user" do
-    it "makes an http request" do
+  describe 'get_user' do
+    it 'makes an http request' do
       @client.should_receive(:get).with('/api/v1/users/1')
       @client.get_user(1)
     end
   end
 
-  describe "update_user" do
-    it "makes an http request" do
+  describe 'update_user' do
+    it 'makes an http request' do
       params = {:first_name => 'jane', :last_name => 'smith'}
       @client.should_receive(:put).with('/api/v1/users/1', params)
       @client.update_user(1, params)
@@ -71,36 +71,36 @@ describe Yammer::Api::User do
     end
   end
 
-  describe "delete_user" do
-    it "makes an http request" do
+  describe 'delete_user' do
+    it 'makes an http request' do
       @client.should_receive(:delete).with('/api/v1/users/1')
       @client.delete_user(1)
     end
   end
 
-  describe "user_by_email" do
-    it "makes an http request" do
+  describe 'get_user_by_email' do
+    it 'makes an http request' do
       @client.should_receive(:get).with('/api/v1/users/by_email', :email => 'bob@yammer-inc.com')
       @client.get_user_by_email('bob@yammer-inc.com')
     end
   end
 
-  describe "current_user" do
-    it "makes an http request" do
+  describe 'current_user' do
+    it 'makes an http request' do
       @client.should_receive(:get).with('/api/v1/users/current')
       @client.current_user
     end
   end
 
-  describe "users_following" do
-    it "makes an http request" do
+  describe 'users_following' do
+    it 'makes an http request' do
       @client.should_receive(:get).with('/api/v1/users/following/3')
       @client.users_following(3)
     end
   end
 
-  describe "users_followed_by" do
-    it "makes an http request" do
+  describe 'users_followed_by' do
+    it 'makes an http request' do
       @client.should_receive(:get).with('/api/v1/users/followed_by/4')
       @client.users_followed_by(4)
     end
