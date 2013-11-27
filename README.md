@@ -48,13 +48,30 @@ Setup a Yammer client application as described on the [Yammer Developer site](ht
 
 ### Obtaining an access token
 
-1. Construct the following URL using the client_id you received `https://www.yammer.com/dialog/oauth?client_id=[:client_id]`
+1. Construct the following GET request using the client_id you received ``
+
+
+```ruby
+  GET https://www.yammer.com/dialog/oauth?client_id=[:client_id]&response_type=code
+```
 
 2. Have your users follow the URL you constructed above to allow your application to access their data 
 
 3. After allowing access, your users will be redirected to your callback URL `http://[:redirect_uri]?code=[:code]`
 
-4. Exchange the code for an access token by making an HTTP GET request to `https://www.yammer.com/oauth2/access_token.json?client_id=[:client_id]&client_secret=[:client_secret]&code=[:code]`
+4. Exchange the code for an access token by making a POST request to Yammer
+
+```ruby
+  POST /oauth2/access_token.json HTTP/1.1
+  Host: www.yammer.com
+  Content-Type: application/x-www-form-urlencoded
+  
+    client_id=[:client_id]
+    client_secret=[:client_secret]
+    code=[:code]
+    redirect_uri=https://example.com/oauth2/callback
+    grant_type=authorization_code
+```
 
 5. The authorization server will respond with an access token
 
