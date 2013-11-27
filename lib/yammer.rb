@@ -20,7 +20,7 @@ require 'yammer/http_adapter'
 require 'yammer/client'
 require 'yammer/api_handler'
 require 'yammer/api_response'
-require 'yammer/models'
+require 'yammer/resources'
 
 module Yammer
   class << self
