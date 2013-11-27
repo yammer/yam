@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'simplecov', '>= 0.7.1'
   s.add_development_dependency 'webmock', '>= 1.9.0'
+  s.add_development_dependency 'yard', '>= 0.8.7.3'
 
   s.post_install_message = %q{ Thanks for installing! For API help go to http://developer.yammer.com }
 end
