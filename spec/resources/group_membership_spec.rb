@@ -19,7 +19,7 @@
 
 require File.expand_path('../../spec_helper', __FILE__)
 
-describe Yammer::Message do
+describe Yammer::Resources::GroupMembership do
 
   before :all do
     Yammer.configure do |conf|
@@ -33,12 +33,12 @@ describe Yammer::Message do
 
   context 'class methods' do
 
-    subject { Yammer::Message }
+    subject { Yammer::Resources::GroupMembership }
 
-    describe '#create' do
-      it 'creates a new group' do
-        stub_request(:post, "https://www.yammer.com/api/v1/messages").with(
-          :body    => { :body => 'python not ruby', :privacy => 'public' },
+    describe '#create_group_membership' do
+      it 'creates a new group membership' do
+        stub_request(:post, "https://www.yammer.com/api/v1/group_memberships").with(
+          :body    => { :group_id => '6' },
           :headers => {
             'Accept'          => 'application/json',
             'Authorization'   => "Bearer #{Yammer.access_token}",
@@ -48,26 +48,9 @@ describe Yammer::Message do
         ).to_return(
           :status => 201,
           :body => '',
-          :headers => {'Location' => 'https://www.yammer.com/api/v1/messages/2'}
-        )
-        subject.create('python not ruby', :privacy => 'public')
-      end
-    end
-
-    describe '#get' do
-      it 'returns message response' do
-        stub_request(:get, "https://www.yammer.com/api/v1/messages/1").with(
-          :headers => {
-            'Accept'          => 'application/json',
-            'Authorization'   => "Bearer #{Yammer.access_token}",
-            'User-Agent'      => "Yammer Ruby Gem #{Yammer::Version}"
-          }
-        ).to_return(
-          :status => 200,
-          :body => fixture('message.json'),
           :headers => {}
         )
-        subject.get(1)
+        subject.create(6)
       end
     end
   end

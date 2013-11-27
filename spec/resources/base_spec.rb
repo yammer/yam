@@ -19,9 +19,9 @@
 
 require File.expand_path('../../spec_helper', __FILE__)
 
-describe Yammer::Base do
+describe Yammer::Resources::Base do
 
-  class DummyModel < Yammer::Base
+  class DummyModel < Yammer::Resources::Base
     attr_accessor_deffered :first_name, :last_name
   end
 

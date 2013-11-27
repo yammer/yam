@@ -13,15 +13,15 @@
 # permissions and limitations under the License.
 
 module Yammer
-  class MessageBody
-    attr_reader :urls, :parsed, :rich
-    attr_accessor :plain
+  module Resources
+    class GroupMembership < Yammer::Resources::Base
 
-    def initialize(opts={})
-      @plain  = opts.fetch(:plain,'')
-      @parsed = opts.fetch(:parsed,'')
-      @rich   = opts.fetch(:rich,'')
-      @urls   = opts.fetch(:urls,'')
+      attr_accessor_deffered 
+
+      # @!scope class
+      def self.create(id)
+        api_handler.create_group_membership(id)
+      end
     end
   end
 end

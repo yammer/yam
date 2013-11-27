@@ -17,12 +17,12 @@
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
 
-require File.expand_path('../spec_helper', __FILE__)
-require 'yammer/identity_map'
+require File.expand_path('../../spec_helper', __FILE__)
+require 'yammer/resources/identity_map'
 
-describe Yammer::IdentityMap do
+describe Yammer::Resources::IdentityMap do
 
-  subject { Yammer::IdentityMap.new }
+  subject { Yammer::Resources::IdentityMap.new }
   
   after :each do
     subject.purge!
@@ -54,13 +54,13 @@ describe Yammer::IdentityMap do
     describe '#put' do
       context 'with nil key' do
         it 'should throw exception' do
-          expect { subject.put(nil, 'value') }.to raise_error(Yammer::IdentityMap::InvalidKeyError)
+          expect { subject.put(nil, 'value') }.to raise_error(Yammer::Resources::IdentityMap::InvalidKeyError)
         end
       end
 
       context 'with empty string' do
         it 'should throw exception' do
-          expect { subject.put('', 'value') }.to raise_error(Yammer::IdentityMap::InvalidKeyError)
+          expect { subject.put('', 'value') }.to raise_error(Yammer::Resources::IdentityMap::InvalidKeyError)
         end
       end
 

@@ -19,7 +19,7 @@
 
 require File.expand_path('../../spec_helper', __FILE__)
 
-describe Yammer::User do
+describe Yammer::Resources::User do
 
   before :all do
     Yammer.configure do |conf|
@@ -33,7 +33,7 @@ describe Yammer::User do
 
   context 'class methods' do
 
-    subject { Yammer::User }
+    subject { Yammer::Resources::User }
 
     describe '#create' do
       it 'creates a new user' do
@@ -75,10 +75,10 @@ describe Yammer::User do
   context 'new user object with id' do
 
     before :each do
-      Yammer::User.identity_map.purge!
+      Yammer::Resources::User.identity_map.purge!
     end
 
-    subject { Yammer::User.new(:id => 1) }
+    subject { Yammer::Resources::User.new(:id => 1) }
 
     describe "#id" do
       it 'returns id' do
@@ -105,7 +105,7 @@ describe Yammer::User do
 
     describe "creating duplicate object" do
       it 'retrieves data from identitymap' do
-        user = Yammer::User.new(:id => 1)
+        user = Yammer::Resources::User.new(:id => 1)
         stub_request(:get, "https://www.yammer.com/api/v1/users/1").with(
           :headers => {
             'Accept'          => 'application/json',
@@ -119,14 +119,14 @@ describe Yammer::User do
         )
         expect(user.full_name).to eq 'John Smith'
 
-        duplicate = Yammer::User.new(:id => 1)
+        duplicate = Yammer::Resources::User.new(:id => 1)
         expect(duplicate.full_name).to eq 'John Smith'
       end
     end
   end
 
   context 'hydrated user object' do
-    subject { Yammer::User.new(MultiJson.load(fixture('user.json'), :symbolize_keys => true)) }
+    subject { Yammer::Resources::User.new(MultiJson.load(fixture('user.json'), :symbolize_keys => true)) }
 
     describe "#id" do
       it 'returns id' do

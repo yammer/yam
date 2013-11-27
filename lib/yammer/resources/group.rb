@@ -13,15 +13,17 @@
 # permissions and limitations under the License.
 
 module Yammer
-  class Group < Yammer::Base
+  module Resources
+    class Group < Yammer::Resources::Base
 
-    attr_accessor_deffered :show_in_directory, :privacy, :description, :creator_type,
-    :creator_id, :mugshot_id, :stats, :state, :web_url, :name, :created_at, :type,
-    :mugshot_url, :url, :full_name, :mugshot_url_template, :description
+      attr_accessor_deffered :show_in_directory, :privacy, :description, :creator_type,
+      :creator_id, :mugshot_id, :stats, :state, :web_url, :name, :created_at, :type,
+      :mugshot_url, :url, :full_name, :mugshot_url_template, :description
 
-    # @!scope class
-    def self.create(params={})
-      api_handler.create_group(params)
+      # @!scope class
+      def self.create(params={})
+        api_handler.create_group(params)
+      end
     end
   end
 end

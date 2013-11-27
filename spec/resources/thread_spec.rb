@@ -19,7 +19,7 @@
 
 require File.expand_path('../../spec_helper', __FILE__)
 
-describe Yammer::Thread do
+describe Yammer::Resources::Thread do
 
   before :all do
     Yammer.configure do |conf|
@@ -31,10 +31,10 @@ describe Yammer::Thread do
     Yammer.reset!
   end
 
-  subject { Yammer::GroupMembership }
+  subject { Yammer::Resources::GroupMembership }
 
   context 'existing public thread' do
-    subject { Yammer::Thread.new(MultiJson.load(fixture("public_thread.json"), :symbolize_keys => true)) }
+    subject { Yammer::Resources::Thread.new(MultiJson.load(fixture("public_thread.json"), :symbolize_keys => true)) }
 
     describe "#id" do
       it 'returns id' do
@@ -44,14 +44,14 @@ describe Yammer::Thread do
 
     describe "#first_reply" do
       it 'returns first_reply' do
-        expect(subject.first_reply).to be_instance_of(Yammer::Message)
+        expect(subject.first_reply).to be_instance_of(Yammer::Resources::Message)
         expect(subject.first_reply.id).to eq 11
       end
     end
 
     describe "#last_reply" do
       it 'returns last_reply' do
-        expect(subject.last_reply).to be_instance_of(Yammer::Message)
+        expect(subject.last_reply).to be_instance_of(Yammer::Resources::Message)
         expect(subject.last_reply.id).to eq 13
       end
     end
@@ -79,11 +79,11 @@ describe Yammer::Thread do
   end
 
   context 'existing private thread' do
-    subject { Yammer::Thread.new(MultiJson.load(fixture("private_thread.json"), :symbolize_keys => true)) }
+    subject { Yammer::Resources::Thread.new(MultiJson.load(fixture("private_thread.json"), :symbolize_keys => true)) }
     describe "people" do
       it 'makes an http request and hydrates object' do
         subject.people.each do |person|
-          expect(person).to be_instance_of(Yammer::User)
+          expect(person).to be_instance_of(Yammer::Resources::User)
         end
       end
     end

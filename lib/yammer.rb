@@ -20,13 +20,7 @@ require 'yammer/http_adapter'
 require 'yammer/client'
 require 'yammer/api_handler'
 require 'yammer/api_response'
-require 'yammer/identity_map'
-require 'yammer/base'
-require 'yammer/user'
-require 'yammer/group'
-require 'yammer/group_membership'
-require 'yammer/message'
-require 'yammer/thread'
+require 'yammer/models'
 
 module Yammer
   class << self

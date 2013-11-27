@@ -239,8 +239,8 @@ The object model is an abstraction that makes it easy to manipulate the JSON dat
 
 
     ```ruby
-    u = Yammer::User.current
-    #> <Yammer::User:0x007f9f4b0c39c8>
+    u = Yammer::Resources::User.current
+    #> <Yammer::Resources::User:0x007f9f4b0c39c8>
 
     u.full_name
     #> 'Kevin Mutyaba'
@@ -254,7 +254,7 @@ The object model is an abstraction that makes it easy to manipulate the JSON dat
     - *fetch a thread with a given id*
 
     ```ruby
-    t = Yammer::Thread.get(3)
+    t = Yammer::Resources::Thread.get(3)
     ```
 
     View the participants in the thread
@@ -268,20 +268,20 @@ The object model is an abstraction that makes it easy to manipulate the JSON dat
 
     ```ruby
     peepl = t.people
-    #> [#<Yammer::User:0x007f9f4c086630 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>, #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=64>] 
+    #> [#<Yammer::Resources::User:0x007f9f4c086630 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>, #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=64>] 
     ```
 
     Object models are lazyly loaded. Calling an accessor on a model will hydrate it
 
     ```ruby
     peepl[0]
-    #> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=18> 
+    #> #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=18> 
 
     peepl[0].permalink
     #> 'thekev'
 
     peepl[0]
-    #=> #<Yammer::User:0x007f9f4c086568 @modified_attributes={}, @attrs={:last_name=>"Mutyaba", :network_id=>1, :first_name=>"Kevin", :id => 18,  :permalink=>"thekev" }, @network_id=1, @first_name="Kev", @full_name="Tiaba", @permalink="thekev", @id=18 > 
+    #=> #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={:last_name=>"Mutyaba", :network_id=>1, :first_name=>"Kevin", :id => 18,  :permalink=>"thekev" }, @network_id=1, @first_name="Kev", @full_name="Tiaba", @permalink="thekev", @id=18 > 
     ```
 
 ## Supported Ruby Versions

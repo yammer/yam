@@ -14,8 +14,8 @@
 
 module Yammer
   class Version
-    MAJOR = 1 unless defined? Yammer::MAJOR
-    MINOR = 1 unless defined? Yammer::MINOR
+    MAJOR = 2 unless defined? Yammer::MAJOR
+    MINOR = 0 unless defined? Yammer::MINOR
     PATCH = 0 unless defined? Yammer::PATCH
     PRE = nil unless defined? Yammer::PRE
 

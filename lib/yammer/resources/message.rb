@@ -13,20 +13,22 @@
 # permissions and limitations under the License.
 
 module Yammer
-  class Message < Yammer::Base
+  module Resources
+    class Message < Yammer::Resources::Base
 
-    attr_accessor_deffered :direct_message, :privacy, :group_id, :created_at,
-    :attachments, :liked_by, :chat_client_sequence, :client_url, :content_excerpt,
-    :message_type, :url, :web_url, :network_id, :system_message, :client_type, 
-    :sender_type, :sender_id, :thread_id, :conversation_id, :replied_to_id, :body
+      attr_accessor_deffered :direct_message, :privacy, :group_id, :created_at,
+      :attachments, :liked_by, :chat_client_sequence, :client_url, :content_excerpt,
+      :message_type, :url, :web_url, :network_id, :system_message, :client_type, 
+      :sender_type, :sender_id, :thread_id, :conversation_id, :replied_to_id, :body
 
-    attr_reader :replied_to_id
+      attr_reader :replied_to_id
 
-    # Creates a new message
-    # @!scope class
-    def self.create(body, params={})
-      api_handler.create_message(body, params)
+      # Creates a new message
+      # @!scope class
+      def self.create(body, params={})
+        api_handler.create_message(body, params)
+      end
+
     end
-
   end
 end

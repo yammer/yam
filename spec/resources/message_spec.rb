@@ -19,25 +19,26 @@
 
 require File.expand_path('../../spec_helper', __FILE__)
 
-describe Yammer::Group do
+describe Yammer::Resources::Message do
+
+  before :all do
+    Yammer.configure do |conf|
+      conf.access_token = 'TolNOFka9Uls2DxahNi78A'
+    end
+  end
+
+  after :all do
+    Yammer.reset!
+  end
+
   context 'class methods' do
 
-    before :all do
-      Yammer.configure do |conf|
-        conf.access_token = 'TolNOFka9Uls2DxahNi78A'
-      end
-    end
-
-    after :all do
-      Yammer.reset!
-    end
-
-    subject { Yammer::Group }
+    subject { Yammer::Resources::Message }
 
     describe '#create' do
       it 'creates a new group' do
-        stub_request(:post, "https://www.yammer.com/api/v1/groups").with(
-          :body    => { :name => 'rails team', :privacy => 'public' },
+        stub_request(:post, "https://www.yammer.com/api/v1/messages").with(
+          :body    => { :body => 'python not ruby', :privacy => 'public' },
           :headers => {
             'Accept'          => 'application/json',
             'Authorization'   => "Bearer #{Yammer.access_token}",
@@ -47,15 +48,15 @@ describe Yammer::Group do
         ).to_return(
           :status => 201,
           :body => '',
-          :headers => {'Location' => 'https://www.yammer.com/api/v1/groups/2'}
+          :headers => {'Location' => 'https://www.yammer.com/api/v1/messages/2'}
         )
-        subject.create(:name => 'rails team', :privacy => 'public')
+        subject.create('python not ruby', :privacy => 'public')
       end
     end
 
     describe '#get' do
-      it 'returns group response' do
-        stub_request(:get, "https://www.yammer.com/api/v1/groups/1").with(
+      it 'returns message response' do
+        stub_request(:get, "https://www.yammer.com/api/v1/messages/1").with(
           :headers => {
             'Accept'          => 'application/json',
             'Authorization'   => "Bearer #{Yammer.access_token}",
@@ -63,7 +64,7 @@ describe Yammer::Group do
           }
         ).to_return(
           :status => 200,
-          :body => fixture('group.json'),
+          :body => fixture('message.json'),
           :headers => {}
         )
         subject.get(1)
