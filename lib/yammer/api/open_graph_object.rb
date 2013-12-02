@@ -39,7 +39,7 @@ module Yammer
       #  :image     => 'https://microsoft.com/global/images/test.jpg'
       # })
       def create_open_graph_object(url, props={})
-        post("/api/v1/open_graph_objects", { :url => url, :properites => props })
+        post("/api/v1/open_graph_objects", { :url => url, :properties => props })
       end
 
       # Subscribes the current user to the open graph object with the request id.
