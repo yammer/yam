@@ -41,7 +41,7 @@ describe Yammer::Api::Search do
       }
       subject.should_receive(:post).with('/api/v1/open_graph_objects', {
         :url=>"http://www.example.com",
-        :properites => {
+        :properties => {
           :site_name => "Microsoft",
           :image => "https://example.com/global/images/test.jpg"
         }
