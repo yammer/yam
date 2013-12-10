@@ -19,7 +19,7 @@ module Yammer
       attr_accessor_deffered :direct_message, :privacy, :group_id, :created_at,
       :attachments, :liked_by, :chat_client_sequence, :client_url, :content_excerpt,
       :message_type, :url, :web_url, :network_id, :system_message, :client_type, 
-      :sender_type, :sender_id, :thread_id, :conversation_id, :replied_to_id, :body
+      :sender_type, :sender_id, :thread_id, :conversation_id, :replied_to_id, :body, :language
 
       attr_reader :replied_to_id
 
