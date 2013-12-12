@@ -25,11 +25,12 @@ Gem::Specification.new do |s|
   s.name             = 'yam'
   s.version          = Yammer::Version
 
-  s.date             = %q{2013-12-04}
+  s.date             = %q{2013-12-12}
   s.summary          = "Yammer API Client"
 
   s.description      = "A Ruby wrapper for accessing Yammer's REST API"
-  s.authors          = ["Kevin Mutyaba", "Jessie A. Young", "Jason Nochlin"]
+  s.authors          = ["Kevin Mutyaba"]
+  s.contributors     = ["Jessie A. Young", "Jason Nochlin"]
   s.email            = %q{kmutyaba@yammer-inc.com}
   s.homepage         = 'http://yammer.github.io/yam'
   s.rubygems_version = Yammer::Version
@@ -46,6 +47,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'multi_json', '~> 1.3'
   s.add_dependency 'rest-client', '~> 1.6.7'
   s.add_dependency 'addressable', '~> 2.3.3'
+  s.add_dependency 'oauth2-client', '~> 1.1.2'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
