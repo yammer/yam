@@ -246,7 +246,7 @@ module Yammer
       # @example Fetch a list of messages in a given thread
       #   msgs = Yammer.messages_for_open_graph_pbject(10)
       def messages_for_open_graph_object(id)
-        get("/api/v1/messages/messages/open_graph_objects/#{id}")
+        get("/api/v1/messages/open_graph_objects/#{id}")
       end
     end
   end 
