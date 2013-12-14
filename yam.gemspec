@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
 
   s.description      = "A Ruby wrapper for accessing Yammer's REST API"
   s.authors          = ["Kevin Mutyaba"]
-  s.contributors     = ["Jessie A. Young", "Jason Nochlin"]
   s.email            = %q{kmutyaba@yammer-inc.com}
   s.homepage         = 'http://yammer.github.io/yam'
   s.rubygems_version = Yammer::Version
