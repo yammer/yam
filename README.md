@@ -5,7 +5,8 @@ Yam
 [![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)](https://travis-ci.org/yammer/yam)
 [![Coverage Status](https://coveralls.io/repos/yammer/yam/badge.png)](https://coveralls.io/r/yammer/yam)
 [![Code Climate](https://codeclimate.com/github/yammer/yam.png)](https://codeclimate.com/github/yammer/yam)
-
+<!-- [![Dependency Status](https://gemnasium.com/tiabas/yammer-oauth2.png)](https://gemnasium.com/yammer/yam)
+ -->
 
 The Yammer Ruby gem
 
