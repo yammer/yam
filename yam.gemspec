@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.name             = 'yam'
   s.version          = Yammer::Version
 
-  s.date             = Date.today.to_s
+  s.date             = %q{2013-16-12}
   s.summary          = "Yammer API Client"
 
   s.description      = "A Ruby wrapper for accessing Yammer's REST API"
@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.signing_key      = File.expand_path("~/.gem/certs/private_key.pem") if $0 =~ /gem\z/
 
   s.add_dependency 'oj', '~> 2.0.10'
-  s.add_dependency 'multi_json', '~> 1.3'
+  s.add_dependency 'multi_json', '~> 1.8.2'
   s.add_dependency 'rest-client', '~> 1.6.7'
   s.add_dependency 'addressable', '~> 2.3.3'
   s.add_dependency 'oauth2-client', '~> 1.1.2'
