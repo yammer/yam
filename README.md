@@ -84,7 +84,7 @@ Setup a Yammer client application as described on the [Yammer Developer site](ht
 }
 ```
 
-## Using bundled Yammer OAuth2 Client
+### Using bundled Yammer OAuth2 Client
 This gem comes bundled with an OAuth2 wrapper that makes provides convenience methods for getting through the OAuth2 flow
 
 ```ruby
@@ -95,11 +95,11 @@ yammer_client = Yammmer::OAuth2Client.new('PRbTcg9qjgKsp4jjpm1pw', 'Xn7kp7Ly0TCY
 
 ```
 
-## Authorization Grants
+#### Authorization Grants
 The client wraps around the creation of any given grant and passing in the parameters defined in the configuration
 file. The supported grants include Authorization Code and Implicit. They are available via the `authorization_code` and `implicit` methods on a client object.
 
-# Authorization Code grant (Server-side authorization)
+#### Authorization Code grant (Server-side authorization)
 
 ```ruby
 
@@ -108,10 +108,7 @@ auth_url = yammer_client.webserver_authorization_url
 # => https://www.yammer.com/dialog/oauth/authorize?client_id=PRbTcg9qjgKsp4jjpm1pw&response_type=code
 
 # exchange authorization code for access token. we will get back a Net::HTTPResponse
-response = yammer_client.exchange_auth_code_for_token({
-    :code => '11a0b0b64db56c30e2ef',
-    :redirect_uri => 'https://localhost/callback',
-  })
+response = yammer_client.access_token_from_authorization_code('11a0b0b64db56c30e2ef', { :redirect_uri => 'https://localhost/callback'})
 
 response.inspect 
 # => #<Net::HTTPOK:0x007ff8bc7c1200>
@@ -125,13 +122,13 @@ response.body
 #    }"
 ```
 
-# Implicit Grant (Client-side authorization)
+#### Implicit Grant (Client-side authorization)
 ```ruby
 authorization_url = yammer_client.clientside_authorization_url(:redirect_uri => 'http://localhost/oauth2/callback')
 # => "https://www.yammer.com/dialog/oauth/?client_id=PRbTcg9qjgKsp4jjpm1pw&redirect_uri=http%3A%2F%2Flocalhost%2Foauth%2Fcallback&response_type=token"
 ```
 
-### Configuring yammer-client
+## Configuring yammer-client
 
 To view the current state of the client use the `options` method
 
