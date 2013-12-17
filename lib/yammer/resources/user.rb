@@ -37,7 +37,7 @@ module Yammer
       :web_url, :url, :external_urls, :activated_at, :summary, :department, :previous_companies,
       :follow_general_messages, :schools, :interests, :significant_other, :network_name, :network_id,
       :can_broadcast, :web_preferences, :network_domains, :location, :contact, :kids_names, :guid,
-      :name, :mugshot_url, :mugshot_url_template, :settings, :timezone
+      :name, :mugshot_url, :mugshot_url_template, :settings, :timezone, :web_oauth_access_token
 
       # Returns user's primary email
       def email
