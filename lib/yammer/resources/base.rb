@@ -197,7 +197,7 @@ module Yammer
       # set all fetchable attributes 
       def update(attrs={})
         attrs.each do |key, value|
-          send("#{key}=", value)
+          send("#{key}=", value) if self.respond_to?("#{key}=")
         end
         if persisted? && !loaded?
           @loaded = @klass.model_attributes.keys.inject(true) do |result, key|
