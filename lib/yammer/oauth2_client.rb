@@ -12,10 +12,10 @@
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
 
-require 'oauth2'
+require 'oauth2-client'
 
 module Yammer
-  class OAuth2Client < OAuth2::Client
+  class OAuth2Client < OAuth2Client::Client
 
     SITE_URL       = 'https://www.yammer.com'
     TOKEN_PATH     = '/oauth2/token'

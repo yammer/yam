@@ -1,5 +1,9 @@
 2.1.0
 ====================================
+- Updated version of OAuth2 Client to 2.0.0 to resolve conflicts with intridea's oauth gem
+
+2.1.0
+====================================
 - Bundled Yammer OAuth2 Client into gem
 
 2.0.1
