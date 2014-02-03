@@ -24,7 +24,7 @@ module Yammer
       # @return [Yammer::ApiResponse]
       # @param body [String] Message body
       # @param [Hash] opts the options to create a message with
-      # @option opts [Integer] :cc
+      # @option opts [Array<Integer>] :cc
       # @option opts [Integer] :replied_to_id
       # @option opts [Integer] :group_id 
       # @option opts [Array<Integer>] :direct_to_user_ids
@@ -35,6 +35,7 @@ module Yammer
       #   msg2 = Yammer.create_message('building a yammer client', :replied_to_id => msg.id)
       def create_message(body, opts={})
         opts[:body] = body
+        opts[:cc] = "[[user:#{opts[:cc].join("]],[[user:")}]]" if !opts[:cc].nil? && opts[:cc].is_a?(Array)
         post("/api/v1/messages", opts)
       end
 
