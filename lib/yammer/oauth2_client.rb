@@ -19,7 +19,7 @@ module Yammer
 
     SITE_URL       = 'https://www.yammer.com'
     TOKEN_PATH     = '/oauth2/access_token'
-    AUTHORIZE_PATH = '/dialog/oauth'
+    AUTHORIZE_PATH = '/oauth2/authorize'
 
     def initialize(client_id, client_secret, opts={})
       site_url = opts.delete(:site_url) || SITE_URL
