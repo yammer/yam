@@ -37,8 +37,8 @@ module Yammer
     #
     # @opts [Hash] additional parameters to be include in URL eg. scope, state, etc
     #
-    # client = YammerClient.new(config)
-    # client.clientside_authorization_url({
+    # client = Yammer::OAuth2Client.new('ETSIGVSxmgZitijWZr0G6w', '4bJZY38TCBB9q8IpkeualA2lZsPhOSclkkSKw3RXuE')
+    # client.webclient_authorization_url({
     #      :redirect_uri => 'https://localhost/oauth/cb',
     #    })
     # >> https://www.yammer.com/dialog/oauth/?client_id={client_id}&
