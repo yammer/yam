@@ -91,7 +91,7 @@ This gem comes bundled with an OAuth2 wrapper that makes provides convenience me
 
 require 'yammer-oauth2/client'
 
-yammer_client = Yammmer::OAuth2Client.new('PRbTcg9qjgKsp4jjpm1pw', 'Xn7kp7Ly0TCY4GtZWkmSsqGEPg10DmMADyjWkf2U')
+yammer_client = Yammer::OAuth2Client.new('PRbTcg9qjgKsp4jjpm1pw', 'Xn7kp7Ly0TCY4GtZWkmSsqGEPg10DmMADyjWkf2U')
 
 ```
 
