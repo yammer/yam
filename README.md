@@ -84,7 +84,7 @@ Setup a Yammer client application as described on the [Yammer Developer site](ht
 }
 ```
 
-### Using bundled Yammer OAuth2 Client
+### Using Yammer OAuth2 Client to obtain an access token
 This gem comes bundled with an OAuth2 wrapper that makes provides convenience methods for getting through the OAuth2 flow
 
 ```ruby
@@ -128,9 +128,11 @@ authorization_url = yammer_client.webclient_authorization_url(:redirect_uri => '
 # => "https://www.yammer.com/oauth2/authorize/?client_id=PRbTcg9qjgKsp4jjpm1pw&redirect_uri=http%3A%2F%2Flocalhost%2Foauth%2Fcallback&response_type=token"
 ```
 
-## Configuring yammer-client
+### Using Yammer API client to access REST endpoints  
 
-To view the current state of the client use the `options` method
+#### Configuration
+
+You can view the current state of the client using the `Yammer#options` method
 
 ```ruby
 require 'yammer'
@@ -139,7 +141,7 @@ Yammer.options
 #> {:site_url=>"https://www.yammer.com", :client_id=>nil, :client_secret=>nil, :access_token=>nil, :http_adapter=>Yammer::Connection, :connection_options=>{:max_redirects=>5, :use_ssl=>true}} 
 ```
 
-You may change this configuration by using the `configure` method
+To change the configuration parameters use the `configure` method
 
 ```ruby
 Yammer.configure do |c|
@@ -180,7 +182,7 @@ Yammer.current_user
 
 ### Calling methods on an instance of Yammer::Client
 NOTE: Use this if you wish to create multiple client instances with diffrent client_id, client_secret and access token.
-If your application uses a signle pair of client_id and client_secret credentials, you ONLY need to sepecify the access token 
+If your application uses a single pair of client_id and client_secret credentials, you ONLY need to specify the access token 
 
 - Create an instance of the Yammer client
 
