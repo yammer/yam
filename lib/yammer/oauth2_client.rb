@@ -18,7 +18,7 @@ module Yammer
   class OAuth2Client < OAuth2Client::Client
 
     SITE_URL       = 'https://www.yammer.com'
-    TOKEN_PATH     = '/oauth2/token'
+    TOKEN_PATH     = '/oauth2/access_token'
     AUTHORIZE_PATH = '/dialog/oauth'
 
     def initialize(client_id, client_secret, opts={})
