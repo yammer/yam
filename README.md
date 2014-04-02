@@ -105,7 +105,7 @@ file. The supported grants include Authorization Code and Implicit. They are ava
 
 # generate authorization url
 auth_url = yammer_client.webserver_authorization_url
-# => https://www.yammer.com/oauth2/authorize/authorize?client_id=PRbTcg9qjgKsp4jjpm1pw&response_type=code
+# => https://www.yammer.com/oauth2/authorize?client_id=PRbTcg9qjgKsp4jjpm1pw&response_type=code
 
 # exchange authorization code for access token. we will get back a Net::HTTPResponse
 response = yammer_client.access_token_from_authorization_code('11a0b0b64db56c30e2ef', { :redirect_uri => 'https://localhost/callback'})
