@@ -53,7 +53,7 @@ Setup a Yammer client application as described on the [Yammer Developer site](ht
 
 
 ```ruby
-  GET https://www.yammer.com/dialog/oauth?client_id=[:client_id]&response_type=code
+  GET https://www.yammer.com/oauth2/authorize?client_id=[:client_id]&response_type=code
 ```
 
 2. Have your users follow the URL you constructed above to allow your application to access their data 
@@ -89,7 +89,7 @@ This gem comes bundled with an OAuth2 wrapper that makes provides convenience me
 
 ```ruby
 
-require 'yammer-oauth2/client'
+require 'yammer'
 
 yammer_client = Yammer::OAuth2Client.new('PRbTcg9qjgKsp4jjpm1pw', 'Xn7kp7Ly0TCY4GtZWkmSsqGEPg10DmMADyjWkf2U')
 
@@ -105,7 +105,7 @@ file. The supported grants include Authorization Code and Implicit. They are ava
 
 # generate authorization url
 auth_url = yammer_client.webserver_authorization_url
-# => https://www.yammer.com/dialog/oauth/authorize?client_id=PRbTcg9qjgKsp4jjpm1pw&response_type=code
+# => https://www.yammer.com/oauth2/authorize/authorize?client_id=PRbTcg9qjgKsp4jjpm1pw&response_type=code
 
 # exchange authorization code for access token. we will get back a Net::HTTPResponse
 response = yammer_client.access_token_from_authorization_code('11a0b0b64db56c30e2ef', { :redirect_uri => 'https://localhost/callback'})
@@ -124,8 +124,8 @@ response.body
 
 #### Implicit Grant (Client-side authorization)
 ```ruby
-authorization_url = yammer_client.clientside_authorization_url(:redirect_uri => 'http://localhost/oauth2/callback')
-# => "https://www.yammer.com/dialog/oauth/?client_id=PRbTcg9qjgKsp4jjpm1pw&redirect_uri=http%3A%2F%2Flocalhost%2Foauth%2Fcallback&response_type=token"
+authorization_url = yammer_client.webclient_authorization_url(:redirect_uri => 'http://localhost/oauth2/callback')
+# => "https://www.yammer.com/oauth2/authorize/?client_id=PRbTcg9qjgKsp4jjpm1pw&redirect_uri=http%3A%2F%2Flocalhost%2Foauth%2Fcallback&response_type=token"
 ```
 
 ## Configuring yammer-client

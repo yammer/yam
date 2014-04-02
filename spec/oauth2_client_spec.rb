@@ -48,7 +48,7 @@ describe Yammer::OAuth2Client do
       )
 
       parsed_url = Addressable::URI.parse(auth_url)
-      expect(parsed_url.path).to eq '/dialog/oauth'
+      expect(parsed_url.path).to eq '/oauth2/authorize'
       expect(parsed_url.query_values).to eq params
       expect(parsed_url.scheme).to eq 'https'
       expect(parsed_url.host).to eq 'www.yammer.com'
@@ -58,7 +58,7 @@ describe Yammer::OAuth2Client do
   describe "#access_token_from_authorization_code" do
     it "makes a POST request to exchange authorization code for access token" do
 
-      stub_request(:post, "https://www.yammer.com/oauth2/token").with(
+      stub_request(:post, "https://www.yammer.com/oauth2/access_token").with(
         :body => {
           :grant_type    => 'authorization_code',
           :code          => 'MmOGL795LbIZuJJVnL49Cc',
@@ -84,7 +84,7 @@ describe Yammer::OAuth2Client do
   describe "#access_token_from_client_credentials" do
     it "makes a POST request to exchange client credentiaks for access token" do
 
-      stub_request(:post, "https://www.yammer.com/oauth2/token").with(
+      stub_request(:post, "https://www.yammer.com/oauth2/access_token").with(
         :body => {
           :grant_type    => 'client_credentials',
           :client_id     => 'PRbTcg9qjgKsp4jjpm1pw',
@@ -103,7 +103,7 @@ describe Yammer::OAuth2Client do
   describe "#access_token_from_resource_owner_credentials" do
     it "makes a POST request to exchange client credentiaks for access token" do
 
-      stub_request(:post, "https://www.yammer.com/oauth2/token").with(
+      stub_request(:post, "https://www.yammer.com/oauth2/access_token").with(
         :body => {
           :grant_type    => 'password',
           :username      => 'thekev',

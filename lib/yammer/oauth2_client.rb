@@ -37,11 +37,11 @@ module Yammer
     #
     # @opts [Hash] additional parameters to be include in URL eg. scope, state, etc
     #
-    # client = Yammer::OAuth2Client.new('ETSIGVSxmgZitijWZr0G6w', '4bJZY38TCBB9q8IpkeualA2lZsPhOSclkkSKw3RXuE')
-    # client.webclient_authorization_url({
+    # >> client = Yammer::OAuth2Client.new('ETSIGVSxmgZitijWZr0G6w', '4bJZY38TCBB9q8IpkeualA2lZsPhOSclkkSKw3RXuE')
+    # >> client.webclient_authorization_url({
     #      :redirect_uri => 'https://localhost/oauth/cb',
     #    })
-    # >> https://www.yammer.com/dialog/oauth/?client_id={client_id}&
+    # >> https://www.yammer.com/oauth2/authorize/?client_id={client_id}&
     #    redirect_uri=http%3A%2F%2Flocalhost%2Foauth%2Fcb&response_type=token
     #
     def webclient_authorization_url(opts={})
@@ -55,11 +55,11 @@ module Yammer
     #
     # @opts [Hash] additional parameters to be include in URL eg. scope, state, etc
     #
-    # >> client = YammerClient.new(config)
+    # >> client = Yammer::OAuth2Client.new('ETSIGVSxmgZitijWZr0G6w', '4bJZY38TCBB9q8IpkeualA2lZsPhOSclkkSKw3RXuE')
     # >> client.webserver_authorization_url({
     #      :redirect_uri => 'https://localhost/oauth/cb',
     #    })
-    # >> https://www.yammer.com/dialog/oauth/?client_id={client_id}&
+    # >> https://www.yammer.com/oauth2/authorize/?client_id={client_id}&
     #    redirect_uri=http%3A%2F%2Flocalhost%2Foauth%2Fcb&response_type=code
     #
     def webserver_authorization_url(opts={})
@@ -75,9 +75,8 @@ module Yammer
     # @opts [Hash] may include redirect uri and other query parameters
     #
     # >> client = YammerClient.new(config)
-    # >> client.exchange_auth_code_for_token({
+    # >> client.access_token_from_authorization_code('G3Y6jU3a', {
     #      :redirect_uri => 'https://localhost:3000/oauth/v2/callback',
-    #      :code => 'G3Y6jU3a',
     #    })
     #
     # POST /oauth2/access_token HTTP/1.1
@@ -95,6 +94,12 @@ module Yammer
     #
     # @opts [Hash] parameters that will be added to URL query string
     #
+    # >> client = Yammer::OAuth2Client.new('ETSIGVSxmgZitijWZr0G6w', '4bJZY38TCBB9q8IpkeualA2lZsPhOSclkkSKw3RXuE')
+    # >> client.access_token_from_client_credentials({
+    #      :client_id     => "ZitijWZr0",
+    #      :client_secret => "F8TCBB9q8IpkeualA2lZsPhOSc"
+    # })
+    #      
     # POST /oauth2/access_token HTTP/1.1
     # Host: www.yammer.com
     # Content-Type: application/x-www-form-urlencoded
@@ -108,6 +113,14 @@ module Yammer
     # Makes a request to Yammer server that will swap resource owner credentials for an access token
     #
     # @opts [Hash] parameters that will be added to URL query string
+    #
+    # >> client = Yammer::OAuth2Client.new('ETSIGVSxmgZitijWZr0G6w', '4bJZY38TCBB9q8IpkeualA2lZsPhOSclkkSKw3RXuE')
+    # >> client.access_token_from_client_credentials({
+    #      :client_id     => "ZitijWZr0",
+    #      :client_secret => "F8TCBB9q8IpkeualA2lZsPhOSc",
+    #      :email => "user@domain.com",
+    #      :password => "abc123"
+    # })
     #
     # POST /oauth2/access_token HTTP/1.1
     # Host: www.yammer.com
