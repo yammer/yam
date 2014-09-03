@@ -33,6 +33,12 @@ module Yammer
       #   msg1 = Yammer.create_message('what are you workings on?')
       #
       #   msg2 = Yammer.create_message('building a yammer client', :replied_to_id => msg.id)
+      #
+      # @example Attaching files
+      #   file1 = File.open('test1.txt')
+      #   file2 = File.open('test2.txt')
+      #   msg3 =  Yammer.create_message('building a yammer client', :attachment1 => file1, :attachment2 => file2 )
+      #
       def create_message(body, opts={})
         opts[:body] = body
         post("/api/v1/messages", opts)
