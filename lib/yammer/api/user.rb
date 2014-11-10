@@ -163,6 +163,19 @@ module Yammer
       def users_followed_by(id)
         get("/api/v1/users/followed_by/#{id}")
       end
+
+      # @rate_limited Yes
+      # @authentication Requires user context
+      # @raise  [Yammer::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Yammer::ApiResponse]
+      # @param  id [Integer] the ID of the group for which you want to get the members of
+      # @param  opts [Hash] A customizable set of opts.
+      # @option opts [Integer] :page
+      # @example Fetch users in a group that the authenticated user is in
+      #   Yammer.users_in_group(1)
+      def users_in_group(id, opts={})
+        get("/api/v1/users/in_group/#{id}", opts)
+      end
     end
   end
 end

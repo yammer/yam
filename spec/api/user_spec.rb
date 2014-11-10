@@ -105,4 +105,16 @@ describe Yammer::Api::User do
       @client.users_followed_by(4)
     end
   end
+
+  describe 'users_in_group' do
+    it 'makes an http request without' do
+      @client.should_receive(:get).with('/api/v1/users/in_group/5', {})
+      @client.users_in_group(5)
+    end
+ 
+    it 'makes an http request with optional parameters' do
+      @client.should_receive(:get).with('/api/v1/users/in_group/5', {:page => 2})
+      @client.users_in_group(5, {:page => 2})
+    end
+  end
 end
