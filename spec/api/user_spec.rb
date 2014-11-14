@@ -94,15 +94,15 @@ describe Yammer::Api::User do
 
   describe 'users_following' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users/following/3')
-      @client.users_following(3)
+      @client.should_receive(:get).with('/api/v1/users/following/3', {:page => 2})
+      @client.users_following(3, page: 2)
     end
   end
 
   describe 'users_followed_by' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users/followed_by/4')
-      @client.users_followed_by(4)
+      @client.should_receive(:get).with('/api/v1/users/followed_by/4', {:page => 2})
+      @client.users_followed_by(4, page: 2)
     end
   end
 
