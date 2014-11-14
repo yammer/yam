@@ -147,10 +147,12 @@ module Yammer
       # @raise  [Yammer::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @return [Yammer::ApiResponse]
       # @param  id [Integer] the ID of the user whose followers you want to get
+      # @param  opts [Hash] A customizable set of opts.
+      # @option opts [Integer] :page
       # @example Fetch users from the authenticated user's network following user whose ID is provided
       #   Yammer.users_following(1)
-      def users_following(id)
-        get("/api/v1/users/following/#{id}")
+      def users_following(id, opts={})
+        get("/api/v1/users/following/#{id}", opts)
       end
 
       # @rate_limited Yes
@@ -158,10 +160,12 @@ module Yammer
       # @raise  [Yammer::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @return [Yammer::ApiResponse]
       # @param  id [Integer] the ID of the user for whom you want to get the users being followed
+      # @param  opts [Hash] A customizable set of opts.
+      # @option opts [Integer] :page
       # @example Fetch users from the authenticated user's network followed by the user whose ID is provided
       #   Yammer.users_followed(1)
-      def users_followed_by(id)
-        get("/api/v1/users/followed_by/#{id}")
+      def users_followed_by(id, opts={})
+        get("/api/v1/users/followed_by/#{id}", opts)
       end
 
       # @rate_limited Yes
