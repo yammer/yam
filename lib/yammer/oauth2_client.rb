@@ -33,7 +33,7 @@ module Yammer
     # Generates the Yammer URL that the user will be redirected to in order to
     # authorize your application
     #
-    # @see https://developer.yammer.com/api/oauth2.html#client-side
+    # @see https://developer.yammer.com/v1.0/docs/oauth-2#client-side-flow
     #
     # @opts [Hash] additional parameters to be include in URL eg. scope, state, etc
     #
@@ -51,7 +51,7 @@ module Yammer
     # Generates the Yammer URL that the user will be redirected to in order to
     # authorize your application
     #
-    # @see https://developer.yammer.com/api/oauth2.html#server-side
+    # @see https://developer.yammer.com/v1.0/docs/oauth-2#server-side-flow
     #
     # @opts [Hash] additional parameters to be include in URL eg. scope, state, etc
     #
@@ -70,7 +70,7 @@ module Yammer
     # Makes a request to Yammer server that will swap your authorization code for an access
     # token
     #
-    # @see https://developer.yammer.com/api/oauth2.html#server-side
+    # @see https://developer.yammer.com/v1.0/docs/oauth-2#server-side-flow
     #
     # @opts [Hash] may include redirect uri and other query parameters
     #
