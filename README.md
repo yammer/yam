@@ -3,7 +3,7 @@ Yam
 
 [![Gem Version](https://badge.fury.io/rb/yam.png)](http://badge.fury.io/rb/yam)
 [![Build Status](https://travis-ci.org/yammer/yam.png?branch=master)](https://travis-ci.org/yammer/yam)
-[![Coverage Status](https://coveralls.io/repos/yammer/yam/badge.png)](https://coveralls.io/r/yammer/yam)
+[![Coverage Status](https://coveralls.io/repos/github/yammer/yam/badge.svg?branch=master)](https://coveralls.io/github/yammer/yam?branch=master)
 [![Code Climate](https://codeclimate.com/github/yammer/yam.png)](https://codeclimate.com/github/yammer/yam)
 <!-- [![Dependency Status](https://gemnasium.com/tiabas/yammer-oauth2.png)](https://gemnasium.com/yammer/yam)
  -->
@@ -16,7 +16,7 @@ This README provides only a basic overview of how to use this gem.For more infor
 
 [http://rdoc.info/github/yammer/yam][documentation]
 
-[documentation]: http://rdoc.info/github/yammer/yam/index 
+[documentation]: http://rdoc.info/github/yammer/yam/index
 
 
 ## Installation
@@ -56,7 +56,7 @@ Setup a Yammer client application as described on the [Yammer Developer site](ht
   GET https://www.yammer.com/oauth2/authorize?client_id=[:client_id]&response_type=code
 ```
 
-2. Have your users follow the URL you constructed above to allow your application to access their data 
+2. Have your users follow the URL you constructed above to allow your application to access their data
 
 3. After allowing access, your users will be redirected to your callback URL `http://[:redirect_uri]?code=[:code]`
 
@@ -66,7 +66,7 @@ Setup a Yammer client application as described on the [Yammer Developer site](ht
   POST /oauth2/access_token.json HTTP/1.1
   Host: www.yammer.com
   Content-Type: application/x-www-form-urlencoded
-  
+
     client_id=[:client_id]
     client_secret=[:client_secret]
     code=[:code]
@@ -110,7 +110,7 @@ auth_url = yammer_client.webserver_authorization_url
 # exchange authorization code for access token. we will get back a Net::HTTPResponse
 response = yammer_client.access_token_from_authorization_code('11a0b0b64db56c30e2ef', { :redirect_uri => 'https://localhost/callback'})
 
-response.inspect 
+response.inspect
 # => #<Net::HTTPOK:0x007ff8bc7c1200>
 
 response.body
@@ -138,7 +138,7 @@ You can view the current state of the client using the `Yammer#options` method
 require 'yammer'
 
 Yammer.options
-#> {:site_url=>"https://www.yammer.com", :client_id=>nil, :client_secret=>nil, :access_token=>nil, :http_adapter=>Yammer::Connection, :connection_options=>{:max_redirects=>5, :use_ssl=>true}} 
+#> {:site_url=>"https://www.yammer.com", :client_id=>nil, :client_secret=>nil, :access_token=>nil, :http_adapter=>Yammer::Connection, :connection_options=>{:max_redirects=>5, :use_ssl=>true}}
 ```
 
 To change the configuration parameters use the `configure` method
@@ -148,14 +148,14 @@ Yammer.configure do |c|
   c.client_id = '[client_id]'
   c.client_secret = '[client_secret]'
 end
-#> Yammer 
+#> Yammer
 ```
 
 At this point, your new settings will take effect.
 
 ```ruby
 Yammer.options
-#> {:site_url=>"https://www.yammer.com", :client_id=>'[client_id]', :client_secret=>'[client_secret]', :access_token=>nil, :http_adapter=>Yammer::Connection, :connection_options=>{ :max_redirects=>5, :use_ssl=>true }} 
+#> {:site_url=>"https://www.yammer.com", :client_id=>'[client_id]', :client_secret=>'[client_secret]', :access_token=>nil, :http_adapter=>Yammer::Connection, :connection_options=>{ :max_redirects=>5, :use_ssl=>true }}
 ```
 Take note of the fact that the `access_token` is nil. This will need to be set and, in the next section, we will see how to do this.
 
@@ -166,7 +166,7 @@ Take note of the fact that the `access_token` is nil. This will need to be set a
   - Calling methods on an instance of `Yammer::Client`.
   - Calling methods on the custom object models (Experimental)
 
-### Calling methods on the Yammer module 
+### Calling methods on the Yammer module
 In order for this to work, you will need to set up your access_token. This assumes that you already configured the client with your default options as was described above.
 
  ```ruby
@@ -182,7 +182,7 @@ Yammer.current_user
 
 ### Calling methods on an instance of Yammer::Client
 NOTE: Use this if you wish to create multiple client instances with diffrent client_id, client_secret and access token.
-If your application uses a single pair of client_id and client_secret credentials, you ONLY need to specify the access token 
+If your application uses a single pair of client_id and client_secret credentials, you ONLY need to specify the access token
 
 - Create an instance of the Yammer client
 
@@ -294,7 +294,7 @@ client2 = Yammer::Client.new(:access_token  => 'ruZy4vFYyTWqnx7adO9ow')
 
 ### Using the object models (Experimental)
 
-The object model is an abstraction that makes it easy to manipulate the JSON data return when accessing Yammer's API. Each model has accessor methods for all keys contained in the JSON response for a given model type. 
+The object model is an abstraction that makes it easy to manipulate the JSON data return when accessing Yammer's API. Each model has accessor methods for all keys contained in the JSON response for a given model type.
 
 
   - **User**
@@ -332,20 +332,20 @@ The object model is an abstraction that makes it easy to manipulate the JSON dat
 
     ```ruby
     peepl = t.people
-    #> [#<Yammer::Resources::User:0x007f9f4c086630 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>, #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=64>] 
+    #> [#<Yammer::Resources::User:0x007f9f4c086630 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>, #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=64>]
     ```
 
     Object models are lazyly loaded. Calling an accessor on a model will hydrate it
 
     ```ruby
     peepl[0]
-    #> #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=18> 
+    #> #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={}, @new_record=false, @id=18>
 
     peepl[0].permalink
     #> 'thekev'
 
     peepl[0]
-    #=> #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={:last_name=>"Mutyaba", :network_id=>1, :first_name=>"Kevin", :id => 18,  :permalink=>"thekev" }, @network_id=1, @first_name="Kev", @full_name="Tiaba", @permalink="thekev", @id=18 > 
+    #=> #<Yammer::Resources::User:0x007f9f4c086568 @modified_attributes={}, @attrs={:last_name=>"Mutyaba", :network_id=>1, :first_name=>"Kevin", :id => 18,  :permalink=>"thekev" }, @network_id=1, @first_name="Kev", @full_name="Tiaba", @permalink="thekev", @id=18 >
     ```
 
 ## Supported Ruby Versions
