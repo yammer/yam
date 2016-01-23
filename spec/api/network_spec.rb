@@ -34,7 +34,7 @@ describe Yammer::Api::Network do
 
   describe '#networks_current' do
     it 'should fetch network data' do
-      subject.should_receive(:get).with('/api/v1/networks/current', { :include_suspended => true })
+      expect(subject).to receive(:get).with('/api/v1/networks/current', { :include_suspended => true })
       subject.current_networks({ :include_suspended => true })
     end
   end

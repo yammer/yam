@@ -36,14 +36,14 @@ describe Yammer::Api::Message do
     context 'with options' do
       it 'should get_messages' do
         params = { :page => 1 }
-        subject.should_receive(:get).with('/api/v1/messages', params)
+        expect(subject).to receive(:get).with('/api/v1/messages', params)
         subject.all_messages(params)
       end
     end
 
     context 'without options' do
       it 'should return all messages viewable by a user' do
-        subject.should_receive(:get).with('/api/v1/messages', {})
+        expect(subject).to receive(:get).with('/api/v1/messages', {})
         subject.all_messages 
       end
     end
@@ -52,98 +52,98 @@ describe Yammer::Api::Message do
   describe '#create_message' do
     it 'should create_message' do
       message = 'Greetings, we come in peace'
-      subject.should_receive(:post).with('/api/v1/messages', :body => message)
+      expect(subject).to receive(:post).with('/api/v1/messages', :body => message)
       subject.create_message(message)
     end
   end
 
   describe '#message' do
     it 'should fetch a message' do
-      subject.should_receive(:get).with('/api/v1/messages/3')
+      expect(subject).to receive(:get).with('/api/v1/messages/3')
       subject.get_message(3)
     end
   end
 
   describe '#delete_message' do
     it 'should delete a message' do
-      subject.should_receive(:delete).with('/api/v1/messages/4')
+      expect(subject).to receive(:delete).with('/api/v1/messages/4')
       subject.delete_message(4)
     end
   end
 
   describe '#messages_sent' do
     it 'should fetch messages sent by a user' do
-      subject.should_receive(:get).with('/api/v1/messages/sent', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/sent', {})
       subject.messages_sent
     end
   end
 
   describe '#messages_received' do
     it 'should fetch messages received by a user' do
-      subject.should_receive(:get).with('/api/v1/messages/received', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/received', {})
       subject.messages_received
     end
   end
 
   describe '#private_messages' do
     it 'should fetch private messages' do
-      subject.should_receive(:get).with('/api/v1/messages/private', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/private', {})
       subject.private_messages
     end
   end
 
   describe '#followed_messages' do
     it 'should fetch messages followed by a user' do
-      subject.should_receive(:get).with('/api/v1/messages/following', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/following', {})
       subject.followed_messages
     end
   end
 
   describe '#messages_from_user' do
     it 'should fetch messages created by a user' do
-      subject.should_receive(:get).with('/api/v1/messages/from_user/14', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/from_user/14', {})
       subject.messages_from_user(14)
     end
   end
 
   describe '#messages_about_topic' do
     it 'should fetch messages about a topic' do
-      subject.should_receive(:get).with('/api/v1/messages/about_topic/19', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/about_topic/19', {})
       subject.messages_about_topic(19)
     end
   end
 
   describe '#messages_in_group' do
     it 'should fetch messages in group' do
-      subject.should_receive(:get).with('/api/v1/messages/in_group/26', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/in_group/26', {})
       subject.messages_in_group(26)
     end
   end
 
   describe '#messages_liked_by' do
     it 'should fetch messages liked by user' do
-      subject.should_receive(:get).with('/api/v1/messages/liked_by/58', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/liked_by/58', {})
       subject.messages_liked_by(58)
     end
   end
 
   describe '#like_message' do
     it 'should like the message as a the specified user' do
-      subject.should_receive(:post).with('/api/v1/messages/liked_by/current.json?message_id=97', {})
+      expect(subject).to receive(:post).with('/api/v1/messages/liked_by/current.json?message_id=97', {})
       subject.like_message(97)
     end
   end
 
   describe '#unlike_message' do
     it 'should unlike the message as a the specified user' do
-      subject.should_receive(:delete).with('/api/v1/messages/liked_by/current.json?message_id=97', {})
+      expect(subject).to receive(:delete).with('/api/v1/messages/liked_by/current.json?message_id=97', {})
       subject.unlike_message(97)
     end
   end
 
   describe '#messages_in_thread' do
     it 'should fetch messages in thread' do
-      subject.should_receive(:get).with('/api/v1/messages/in_thread/97', {})
+      expect(subject).to receive(:get).with('/api/v1/messages/in_thread/97', {})
       subject.messages_in_thread(97)
     end
   end

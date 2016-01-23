@@ -34,7 +34,7 @@ describe Yammer::Api::Search do
 
   describe '#subscription' do
     it 'should create new subscription' do
-      subject.should_receive(:post).with('/api/v1/subscriptions', :target_type =>'OpenGraphObject', :target_id => 1)
+      expect(subject).to receive(:post).with('/api/v1/subscriptions', :target_type =>'OpenGraphObject', :target_id => 1)
       subject.create_subscription('OpenGraphObject', 1)
     end
   end

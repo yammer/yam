@@ -34,7 +34,7 @@ describe Yammer::Api::Notification do
 
   describe '#notifications' do
     it "should fetch authenticated user's notifications" do
-      subject.should_receive(:get).with('/api/v1/streams/notifications')
+      expect(subject).to receive(:get).with('/api/v1/streams/notifications')
       subject.notifications
     end
   end

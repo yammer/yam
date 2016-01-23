@@ -39,7 +39,7 @@ describe Yammer::Api::Search do
         :site_name => 'Microsoft',
         :image     => 'https://example.com/global/images/test.jpg'
       }
-      subject.should_receive(:post).with('/api/v1/open_graph_objects', {
+      expect(subject).to receive(:post).with('/api/v1/open_graph_objects', {
         :url=>"http://www.example.com",
         :properties => {
           :site_name => "Microsoft",
@@ -50,17 +50,17 @@ describe Yammer::Api::Search do
     end
 
     it 'should follow open graph object' do
-      subject.should_receive(:post).with('/api/v1/subscriptions', :target_id => 7, :target_type => 'OpenGraphObject')
+      expect(subject).to receive(:post).with('/api/v1/subscriptions', :target_id => 7, :target_type => 'OpenGraphObject')
       subject.follow_open_graph_object(7)
     end
 
     it 'should follow opnen graph object' do
-      subject.should_receive(:get).with('/api/v1/subscriptions/to_open_graph_object/5')
+      expect(subject).to receive(:get).with('/api/v1/subscriptions/to_open_graph_object/5')
       subject.is_following_open_graph_object?(5)
     end
 
     it 'should fetch open graph objects in user activity stream' do
-      subject.should_receive(:get).with('/api/v1/streams/activities', :owner_type => 'open_graph_object', :owner_id => 4)
+      expect(subject).to receive(:get).with('/api/v1/streams/activities', :owner_type => 'open_graph_object', :owner_id => 4)
       subject.get_activity_stream_open_graph_objects(4)
     end
   end

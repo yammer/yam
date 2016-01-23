@@ -1,13 +1,13 @@
 # Copyright (c) Microsoft Corporation
 # All rights reserved.
-# Licensed under the Apache License, Version 2.0 (the "License"); 
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+# You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 #
-# THIS CODE IS PROVIDED *AS IS* BASIS, WITHOUT WARRANTIES OR 
-# CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING 
+# THIS CODE IS PROVIDED *AS IS* BASIS, WITHOUT WARRANTIES OR
+# CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING
 # WITHOUT LIMITATION ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE,
-# FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABLITY OR NON-INFRINGEMENT. 
+# FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABLITY OR NON-INFRINGEMENT.
 
 # See the Apache Version 2.0 License for specific language governing
 # permissions and limitations under the License.
@@ -15,8 +15,8 @@
 module Yammer
   class Version
     MAJOR = 2 unless defined? Yammer::MAJOR
-    MINOR = 4 unless defined? Yammer::MINOR
-    PATCH = 1 unless defined? Yammer::PATCH
+    MINOR = 5 unless defined? Yammer::MINOR
+    PATCH = 0 unless defined? Yammer::PATCH
     PRE = nil unless defined? Yammer::PRE
 
     class << self
