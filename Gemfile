@@ -19,6 +19,8 @@
 
 source 'https://rubygems.org'
 
+gem 'coveralls', require: false
+
 group :test do
   gem 'rspec', '>= 2.11'
   gem 'simplecov', :require => false
