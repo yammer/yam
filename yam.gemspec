@@ -44,16 +44,16 @@ Gem::Specification.new do |s|
   s.signing_key      = File.expand_path("~/.gem/certs/private_key.pem") if $0 =~ /gem\z/
 
   s.add_dependency 'oj', '~> 2.14'
-  s.add_dependency 'multi_json', '>= 1.8'
-  s.add_dependency 'rest-client', '>= 1.8'
+  s.add_dependency 'multi_json', '~> 1.8'
+  s.add_dependency 'rest-client', '~> 1.8'
   s.add_dependency 'addressable', '~> 2.4'
   s.add_dependency 'oauth2-client', '~> 2.0'
 
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rake', '~> 0'
+  s.add_development_dependency 'rspec', '~> 0'
   s.add_development_dependency 'simplecov', '~> 0.11.1'
-  s.add_development_dependency 'webmock', '~> 1.17.0'
-  s.add_development_dependency 'yard', '>= 0.8.7'
+  s.add_development_dependency 'webmock', '~> 1.17', '>= 1.17.0'
+  s.add_development_dependency 'yard', '~> 0.8', '>= 0.8.7'
 
   s.post_install_message = %q{ Thanks for installing! For API help go to http://developer.yammer.com }
 end
