@@ -34,7 +34,7 @@ describe Yammer::Api::Autocomplete do
 
   describe '#autocomplete' do
     it 'should fetch autocomplete data' do
-      subject.should_receive(:get).with('/api/v1/autocomplete/ranked', { :prefix => 'alc' })
+      expect(subject).to receive(:get).with('/api/v1/autocomplete/ranked', { :prefix => 'alc' })
       subject.autocomplete({ :prefix => 'alc' })
     end
   end

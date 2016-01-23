@@ -34,7 +34,7 @@ describe Yammer::Api::Search do
 
   describe '#search' do
     it 'should search for stuff' do
-      subject.should_receive(:get).with('/api/v1/search', { :search => 'tdd dojo' })
+      expect(subject).to receive(:get).with('/api/v1/search', { :search => 'tdd dojo' })
       subject.search(:search => 'tdd dojo')
     end
   end

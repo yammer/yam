@@ -31,28 +31,28 @@ describe Yammer::Api::Search do
 
     context 'with single email as string' do
       it 'should invite users' do
-        subject.should_receive(:post).with('/api/v1/invitations', { :email => 'alice@yammer.com' })
+        expect(subject).to receive(:post).with('/api/v1/invitations', { :email => 'alice@yammer.com' })
         subject.invite('alice@yammer.com ')
       end
     end
 
     context 'with single email as array' do
       it 'should invite users' do
-        subject.should_receive(:post).with('/api/v1/invitations', { :email => 'bob@yammer.com' })
+        expect(subject).to receive(:post).with('/api/v1/invitations', { :email => 'bob@yammer.com' })
         subject.invite(%w{bob@yammer.com})
       end
     end
 
     context 'with multiple emails as string' do
       it 'should invite users' do
-        subject.should_receive(:post).with('/api/v1/invitations', { :email => 'bob@yammer.com,alice@yammer.com' })
+        expect(subject).to receive(:post).with('/api/v1/invitations', { :email => 'bob@yammer.com,alice@yammer.com' })
         subject.invite(' bob@yammer.com,alice@yammer.com ')
       end
     end
 
     context 'with multiple emails as array' do
       it 'should invite users' do
-        subject.should_receive(:post).with('/api/v1/invitations', { :email => 'bob@yammer.com,alice@yammer.com' })
+        expect(subject).to receive(:post).with('/api/v1/invitations', { :email => 'bob@yammer.com,alice@yammer.com' })
         subject.invite(%w{ bob@yammer.com alice@yammer.com })
       end
     end

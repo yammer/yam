@@ -34,14 +34,14 @@ describe Yammer::Api::PendingAttachment do
 
   describe '#get_pending_attachment' do
     it 'should fetch a pending attachment' do
-      subject.should_receive(:get).with('/api/v1/pending_attachments/2')
+      expect(subject).to receive(:get).with('/api/v1/pending_attachments/2')
       subject.get_pending_attachment(2)
     end
   end
 
   describe '#delete_pending_attachment' do
     it 'should delete a pending attachment' do
-      subject.should_receive(:delete).with('/api/v1/pending_attachments/1')
+      expect(subject).to receive(:delete).with('/api/v1/pending_attachments/1')
       subject.delete_pending_attachment(1)
     end
   end
@@ -49,7 +49,7 @@ describe Yammer::Api::PendingAttachment do
   describe '#create_pending_attachment' do
     it 'should create a pending attachment' do
       attachment = upload('attachment.txt')
-      subject.should_receive(:post).with('/api/v1/pending_attachments', :attachment => attachment)
+      expect(subject).to receive(:post).with('/api/v1/pending_attachments', :attachment => attachment)
       subject.create_pending_attachment(attachment)
     end
   end

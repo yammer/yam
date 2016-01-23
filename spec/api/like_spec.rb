@@ -29,17 +29,17 @@ describe Yammer::Api::Topic do
 
   describe '#likes' do
     it 'should check if user likes open graph object' do
-      subject.should_receive(:get).with('/api/v1/likes/open_graph_object/1')
+      expect(subject).to receive(:get).with('/api/v1/likes/open_graph_object/1')
       subject.likes_open_graph_object?(1)
     end
 
     it 'should like open graph object' do
-      subject.should_receive(:post).with('/api/v1/likes', :id => 1, :type => 'OpenGraphObject')
+      expect(subject).to receive(:post).with('/api/v1/likes', :id => 1, :type => 'OpenGraphObject')
       subject.like('OpenGraphObject', 1)
     end
 
     it 'should unlike open graph object' do
-      subject.should_receive(:delete).with('/api/v1/likes/1')
+      expect(subject).to receive(:delete).with('/api/v1/likes/1')
       subject.unlike(1)
     end
   end

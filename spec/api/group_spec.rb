@@ -34,28 +34,28 @@ describe Yammer::Api::Group do
 
   describe '#all_groups' do
     it 'should fetch all groups in network' do
-      subject.should_receive(:get).with('/api/v1/groups', {})
+      expect(subject).to receive(:get).with('/api/v1/groups', {})
       subject.all_groups
     end
   end
 
   describe '#groups_for_user' do
     it 'should fetch all groups for user' do
-      subject.should_receive(:get).with('/api/v1/groups/for_user/2')
+      expect(subject).to receive(:get).with('/api/v1/groups/for_user/2')
       subject.groups_for_user(2)
     end
   end
 
   describe '#get_group' do
     it 'should fetch a thread' do
-      subject.should_receive(:get).with('/api/v1/groups/1')
+      expect(subject).to receive(:get).with('/api/v1/groups/1')
       subject.get_group(1)
     end
   end
 
   describe '#create_group' do
     it 'should fetch a thread' do
-      subject.should_receive(:post).with('/api/v1/groups', {
+      expect(subject).to receive(:post).with('/api/v1/groups', {
         :name => 'my group',
         :description => 'A test group',
         :private => false
@@ -66,7 +66,7 @@ describe Yammer::Api::Group do
 
   describe '#update_group' do
     it 'should fetch a thread' do
-      subject.should_receive(:post).with('/api/v1/groups/2', {
+      expect(subject).to receive(:post).with('/api/v1/groups/2', {
         :name => 'another group',
         :description => 'A modified group description',
       })

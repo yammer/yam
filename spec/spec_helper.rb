@@ -28,7 +28,6 @@ SimpleCov.start
 
 require 'yammer'
 require 'rspec'
-require 'rspec/autorun'
 require 'webmock/rspec'
 
 WebMock.disable_net_connect!(:allow => 'coveralls.io')

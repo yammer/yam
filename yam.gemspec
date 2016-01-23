@@ -43,15 +43,15 @@ Gem::Specification.new do |s|
   s.cert_chain       = ['certs/public.pem']
   s.signing_key      = File.expand_path("~/.gem/certs/private_key.pem") if $0 =~ /gem\z/
 
-  s.add_dependency 'oj', '~> 2.0'
-  s.add_dependency 'multi_json', '~> 1.10'
-  s.add_dependency 'rest-client', '~> 1.6'
-  s.add_dependency 'addressable', '~> 2.3'
+  s.add_dependency 'oj', '~> 2.14'
+  s.add_dependency 'multi_json', '>= 1.8'
+  s.add_dependency 'rest-client', '>= 1.8'
+  s.add_dependency 'addressable', '~> 2.4'
   s.add_dependency 'oauth2-client', '~> 2.0'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'simplecov', '~> 0.8'
+  s.add_development_dependency 'simplecov', '~> 0.11.1'
   s.add_development_dependency 'webmock', '~> 1.9'
   s.add_development_dependency 'yard', '>= 0.8'
 

@@ -35,7 +35,7 @@ describe Yammer::Api::User do
 
   describe 'all_users' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users', { :page => 1, :letter => 'm' })
+      expect(@client).to receive(:get).with('/api/v1/users', { :page => 1, :letter => 'm' })
       @client.all_users({:page => 1, :letter => 'm'})
     end
   end
@@ -43,14 +43,14 @@ describe Yammer::Api::User do
   describe 'create_user' do
     it 'makes an http request' do
       params = {:first_name => 'john', :last_name => 'doe', :email => 'jdoe@yammer-inc.com'}
-      @client.should_receive(:post).with('/api/v1/users', params)
+      expect(@client).to receive(:post).with('/api/v1/users', params)
       @client.create_user(params)
     end
   end
 
   describe 'get_user' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users/1')
+      expect(@client).to receive(:get).with('/api/v1/users/1')
       @client.get_user(1)
     end
   end
@@ -58,14 +58,14 @@ describe Yammer::Api::User do
   describe 'update_user' do
     it 'makes an http request' do
       params = {:first_name => 'jane', :last_name => 'smith'}
-      @client.should_receive(:put).with('/api/v1/users/1', params)
+      expect(@client).to receive(:put).with('/api/v1/users/1', params)
       @client.update_user(1, params)
     end
 
     context 'with id as a string' do
       it 'updates user' do
         params = {:first_name => 'jane', :last_name => 'smith'}
-        @client.should_receive(:put).with('/api/v1/users/current', params)
+        expect(@client).to receive(:put).with('/api/v1/users/current', params)
         subject.update_user('current', params)
       end
     end
@@ -73,47 +73,47 @@ describe Yammer::Api::User do
 
   describe 'delete_user' do
     it 'makes an http request' do
-      @client.should_receive(:delete).with('/api/v1/users/1')
+      expect(@client).to receive(:delete).with('/api/v1/users/1')
       @client.delete_user(1)
     end
   end
 
   describe 'get_user_by_email' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users/by_email', :email => 'bob@yammer-inc.com')
+      expect(@client).to receive(:get).with('/api/v1/users/by_email', :email => 'bob@yammer-inc.com')
       @client.get_user_by_email('bob@yammer-inc.com')
     end
   end
 
   describe 'current_user' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users/current')
+      expect(@client).to receive(:get).with('/api/v1/users/current')
       @client.current_user
     end
   end
 
   describe 'users_following' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users/following/3', {:page => 2})
+      expect(@client).to receive(:get).with('/api/v1/users/following/3', {:page => 2})
       @client.users_following(3, page: 2)
     end
   end
 
   describe 'users_followed_by' do
     it 'makes an http request' do
-      @client.should_receive(:get).with('/api/v1/users/followed_by/4', {:page => 2})
+      expect(@client).to receive(:get).with('/api/v1/users/followed_by/4', {:page => 2})
       @client.users_followed_by(4, page: 2)
     end
   end
 
   describe 'users_in_group' do
     it 'makes an http request without' do
-      @client.should_receive(:get).with('/api/v1/users/in_group/5', {})
+      expect(@client).to receive(:get).with('/api/v1/users/in_group/5', {})
       @client.users_in_group(5)
     end
- 
+
     it 'makes an http request with optional parameters' do
-      @client.should_receive(:get).with('/api/v1/users/in_group/5', {:page => 2})
+      expect(@client).to receive(:get).with('/api/v1/users/in_group/5', {:page => 2})
       @client.users_in_group(5, {:page => 2})
     end
   end

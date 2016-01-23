@@ -34,14 +34,14 @@ describe Yammer::Api::GroupMembership do
 
   describe '#get_group_membership' do
     it 'should fetch a group membership' do
-      subject.should_receive(:get).with('/api/v1/group_memberships/1')
+      expect(subject).to receive(:get).with('/api/v1/group_memberships/1')
       subject.get_group_membership(1)
     end
   end
 
   describe '#create_group_membership' do
     it 'should create a group membership' do
-      subject.should_receive(:post).with('/api/v1/group_memberships', { :group_id => 2 })
+      expect(subject).to receive(:post).with('/api/v1/group_memberships', { :group_id => 2 })
       subject.create_group_membership(2)
     end
   end

@@ -34,7 +34,7 @@ describe Yammer::Api::Thread do
 
   describe '#get_thread' do
     it 'should fetch a thread' do
-      subject.should_receive(:get).with('/api/v1/threads/1', {})
+      expect(subject).to receive(:get).with('/api/v1/threads/1', {})
       subject.get_thread(1)
     end
   end

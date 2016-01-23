@@ -150,12 +150,12 @@ describe Yammer::Resources::Base do
 
         it 'should update model' do
           api_handler = double("ApiHandler")
-          api_handler.should_receive(:update_dummy_model).with(42, hash_including(
+          expect(api_handler).to receive(:update_dummy_model).with(42, hash_including(
             :first_name =>'john',
             :last_name => 'smith')
           ).and_return(double('Response', :success? => true, :created? => true, :body => {:id => 2}))
 
-          subject.stub(:api_handler).and_return(api_handler)
+          expect(subject).to receive(:api_handler).and_return(api_handler)
           subject.first_name = 'john'
           subject.last_name = 'smith'
           subject.save
@@ -167,11 +167,11 @@ describe Yammer::Resources::Base do
 
         it 'should do nothing' do
           api_handler = double("ApiHandler")
-          api_handler.should_receive(:create_dummy_model).with(
+          expect(api_handler).to receive(:create_dummy_model).with(
             hash_including(:first_name =>'jim', :last_name => 'peters')
           ).and_return(double('Response', :success? => true, :created? => true, :body => {:id => '2'}))
 
-          subject.stub(:api_handler).and_return(api_handler)
+          expect(subject).to receive(:api_handler).and_return(api_handler)
           subject.save
         end
       end
@@ -181,12 +181,12 @@ describe Yammer::Resources::Base do
 
         it 'should create model' do
           api_handler = double("ApiHandler")
-          api_handler.should_receive(:create_dummy_model).with({
+          expect(api_handler).to receive(:create_dummy_model).with({
             :first_name =>'john',
             :last_name => 'peters'
           }).and_return(double('Response', :success? => true, :created? => true, :body => {:id => 2}))
 
-          subject.stub(:api_handler).and_return(api_handler)
+          expect(subject).to receive(:api_handler).and_return(api_handler)
           subject.first_name = 'john'
           subject.save
         end

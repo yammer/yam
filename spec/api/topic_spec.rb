@@ -34,7 +34,7 @@ describe Yammer::Api::Topic do
 
   describe '#topics' do
     it 'should fetch topic' do
-      subject.should_receive(:get).with('/api/v1/topics/1',{ :is_followed_by => 2 })
+      expect(subject).to receive(:get).with('/api/v1/topics/1',{ :is_followed_by => 2 })
       subject.get_topic(1, :is_followed_by => 2)
     end
   end

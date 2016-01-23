@@ -53,7 +53,7 @@ describe Yammer::Api::Activity do
           email: 'example@yammer-inc.com'
         }]
       }
-      subject.should_receive(:post).with('/api/v1/activity', params)
+      expect(subject).to receive(:post).with('/api/v1/activity', params)
       @client.create_activity(params)
     end
   end
