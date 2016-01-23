@@ -131,7 +131,7 @@ describe Yammer::Client do
   describe "#request" do
     context "when method is not supported" do
       it "raises an error" do
-        subject.send(:request, :patch, '/')
+        expect {subject.send(:request, :patch, '/')}.to raise_error(NoMethodError)
       end
     end
 
