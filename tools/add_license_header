@@ -1,0 +1,16 @@
+# !/usr/bin/env bash
+# adds the license summary to the top of any .rb file that is (1) tracked by
+# git and (2) doesn't already have the header.
+
+cd `git rev-parse --show-toplevel`
+
+ruby_files=`git ls-files | grep '\.rb$'`
+copyright_line=`head -1 tools/license_header`
+
+for f in `grep -L "$copyright_line" $ruby_files`
+do
+    echo "Adding license header to $f"
+    dest="$f.with_header"
+    cat tools/license_header $f > $dest
+    mv $dest $f
+done
