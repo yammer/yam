@@ -28,7 +28,39 @@ describe Yammer::HttpAdapter do
     end
   end
 
-  context "initialization" do 
+  describe "#send_request" do
+    context 'when resource is found' do
+      subject { @conn = Yammer::HttpAdapter.new('https://www.yammer.com') }
+      let(:uri) { 'https://www.yammer.com/foo' }
+      before    { stub_request(:get, uri).to_return(status: 200, body: nil) }
+      it "returns a Yammer APIResponse" do
+        response = subject.send_request(:get, "/foo")
+        expect(response).to be_a(Yammer::ApiResponse)
+      end
+    end
+
+    context 'when resource is not found' do
+      subject { @conn = Yammer::HttpAdapter.new('https://www.yammer.com') }
+      let(:uri) { 'https://www.yammer.com/foo' }
+      before    { stub_request(:get, uri).to_return(status: 404, body: nil) }
+      it "returns a Yammer APIResponse" do
+        response = subject.send_request(:get, "/foo")
+        expect(response).to eq(Yammer::Error::NotFound)
+      end
+    end
+
+    context 'when resource is unauthorized' do
+      subject { @conn = Yammer::HttpAdapter.new('https://www.yammer.com') }
+      let(:uri) { 'https://www.yammer.com/foo' }
+      before    { stub_request(:get, uri).to_return(status: 401, body: nil) }
+      it "returns a Yammer APIResponse" do
+        response = subject.send_request(:get, "/foo")
+        expect(response).to eq(Yammer::Error::Unauthorized )
+      end
+    end
+  end
+
+  context "initialization" do
     context "with user options" do
 
       before do
