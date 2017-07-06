@@ -259,7 +259,7 @@ describe Yammer::Client do
           }
         ).to_return(:status => 301, :body => "", :headers => { 'Location' => 'https://www.yammer.com/people'})
 
-      expect { subject.send(:request, :get, '/users') }.to raise_error(RestClient::MaxRedirectsReached)
+      expect { subject.send(:request, :get, '/users') }.to raise_error(RestClient::ExceptionWithResponse)
     end
 
     it "modifies http 303 redirect from POST to GET " do
