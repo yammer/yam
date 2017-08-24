@@ -259,7 +259,7 @@ describe Yammer::Client do
           }
         ).to_return(:status => 301, :body => "", :headers => { 'Location' => 'https://www.yammer.com/people'})
 
-      expect { subject.send(:request, :get, '/users') }.to raise_error(RestClient::MaxRedirectsReached)
+      expect(subject.get('/users')).to  eq (Yammer::Error::ApiError)
     end
 
     it "modifies http 303 redirect from POST to GET " do
@@ -347,7 +347,7 @@ describe Yammer::Client do
           :body => '{ "response": { "message": "Token not found.", "code": 16, "stat": "fail" } }',
           :status => 401)
 
-        expect(subject.get('/users/1')).to eq('{ "response": { "message": "Token not found.", "code": 16, "stat": "fail" } }')
+        expect(subject.get('/users/1')).to eq(Yammer::Error::Unauthorized)
       end
     end
 
@@ -357,7 +357,7 @@ describe Yammer::Client do
           :body => '{ "response": { "message": "Rate limited due to excessive requests.", "code": 33, "stat": "fail" } }',
           :status => 429
         )
-        expect(subject.get('/users/1')).to eq('{ "response": { "message": "Rate limited due to excessive requests.", "code": 33, "stat": "fail" } }')
+        expect(subject.get('/users/1')).to eq(Yammer::Error::RateLimitExceeded)
       end
     end
   end

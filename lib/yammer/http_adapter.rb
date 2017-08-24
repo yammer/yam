@@ -84,7 +84,7 @@ class HttpAdapter
       result = Yammer::ApiResponse.new(resp.headers, resp.body, resp.code)
     rescue => e
       if e.is_a?(RestClient::ExceptionWithResponse)
-        e.response
+        Yammer::Error.from_status(e.http_code)
       else
         raise e
       end
