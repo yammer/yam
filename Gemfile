@@ -20,10 +20,10 @@
 source 'https://rubygems.org'
 
 group :test do
-  gem 'rspec', '>= 2.11'
+  gem 'rspec', '>= 3.9'
   gem 'simplecov', :require => false
   gem 'coveralls', :require => false
-  gem 'webmock', '>= 1.22.0'
+  gem 'webmock', '>= 3.8'
 end
 
 gemspec

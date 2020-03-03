@@ -20,7 +20,10 @@
 require 'simplecov'
 require 'coveralls'
 
-SimpleCov.start
+SimpleCov.start do
+  add_filter '/spec/'
+end
+
 
 require 'yammer'
 require 'rspec'

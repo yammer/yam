@@ -147,7 +147,7 @@ describe Yammer::Client do
           :headers => {
             'Accept'=>'application/json',
             'User-Agent'=>"Yammer Ruby Gem #{Yammer::Version}"
-        })
+          })
         response = subject.send(:request, method, path, params)
 
         expect(response.code).to eq 200
@@ -180,12 +180,12 @@ describe Yammer::Client do
           :body => {
             "first_name"=>"john",
             "last_name"=>"smith"
-            },
+          },
           :headers => {
             'Accept'=>'application/json',
             'Content-Type'=>'application/x-www-form-urlencoded',
             'User-Agent'=>"Yammer Ruby Gem #{Yammer::Version}"
-        }).to_return(:status => 200, :body => "", :headers => {})
+          }).to_return(:status => 200, :body => "", :headers => {})
 
         response =subject.send(:request, :post, path, params)
         expect(response.code).to eq 200
@@ -206,14 +206,14 @@ describe Yammer::Client do
           },
           :headers => {
             'Accept'=>'application/json',
-            'Content-Type'=>'application/x-www-form-urlencoded',
-            'Authorization'=>'Bearer TolNOFka9Uls2DxahNi78A',
-            'User-Agent'=>"Yammer Ruby Gem #{Yammer::Version}"
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer TolNOFka9Uls2DxahNi78A',
+            'User-Agent' => "Yammer Ruby Gem #{Yammer::Version}"
           }).
-         to_return(:status => 200, :body => "", :headers => {})
+          to_return(:status => 200, :body => "", :headers => {})
 
-        response = subject.send(:request, :put, path, params)
-        expect(response.code).to eq 200
+          response = subject.send(:request, :put, path, params)
+          expect(response.code).to eq 200
       end
     end
 
@@ -223,15 +223,21 @@ describe Yammer::Client do
         :body => params,
         :headers => {
           'Accept' =>'application/json',
-          'Accept-Encoding' => 'gzip, deflate',
-          'Content-Type'    => 'application/x-www-form-urlencoded',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type' => 'application/x-www-form-urlencoded',
           'User-Agent'      => "Yammer Ruby Gem #{Yammer::Version}"
         }
       ).to_return(:status => 303, :body => "", :headers => { 'Location' => 'https://www.yammer.com/members'})
 
-      stub_request(:get, "https://www.yammer.com/members").
-         with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>"Yammer Ruby Gem #{Yammer::Version}"}).
-         to_return(:status => 200, :body => "", :headers => {})
+      stub_request(:get, "https://www.yammer.com/members").with(
+        :headers => {
+          'Accept'=>'application/json',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Authorization'=>'Bearer TolNOFka9Uls2DxahNi78A',
+          'User-Agent'=>"Yammer Ruby Gem #{Yammer::Version}"
+        }
+      ).to_return(:status => 200, :body => "", :headers => {})
+
       response = subject.send(:request, :post, '/users', params)
 
       expect(response.code).to eq 200
@@ -240,26 +246,24 @@ describe Yammer::Client do
     it "respects the redirect limit " do
       subject.connection_options = { :max_redirects => 1 }
 
-      stub_request(:get, "https://www.yammer.com/users").
-         with(
-          :headers => {
-            'Accept' => 'application/json',
-            'Accept-Encoding'=> 'gzip, deflate',
-            'User-Agent'     => "Yammer Ruby Gem #{Yammer::Version}"
-          }
-        ).to_return(:status => 301, :body => "", :headers => { 'Location' => 'https://www.yammer.com/members'})
+      stub_request(:get, "https://www.yammer.com/users").with(
+        :headers => {
+          'Accept' =>'application/json',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent' => "Yammer Ruby Gem #{Yammer::Version}"
+        }
+      ).to_return(:status => 301, :body => "", :headers => { 'Location' => 'https://www.yammer.com/members'})
 
 
-       stub_request(:get, "https://www.yammer.com/members").
-         with(
-          :headers => {
-            'Accept' => 'application/json',
-            'Accept-Encoding'=> 'gzip, deflate',
-            'User-Agent'     => "Yammer Ruby Gem #{Yammer::Version}"
-          }
-        ).to_return(:status => 301, :body => "", :headers => { 'Location' => 'https://www.yammer.com/people'})
+      stub_request(:get, "https://www.yammer.com/members").with(
+        :headers => {
+          'Accept' =>'application/json',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent' => "Yammer Ruby Gem #{Yammer::Version}"
+        }
+      ).to_return(:status => 301, :body => "", :headers => { 'Location' => 'https://www.yammer.com/people'})
 
-      expect { subject.send(:request, :get, '/users') }.to raise_error(RestClient::MaxRedirectsReached)
+      expect { subject.send(:request, :get, '/users') }.to raise_error(RestClient::TooManyRequests)
     end
 
     it "modifies http 303 redirect from POST to GET " do
@@ -267,11 +271,11 @@ describe Yammer::Client do
       stub_request(:post, "https://www.yammer.com/users").with(
         :body => params,
         :headers => {
-          'Accept'=>'application/json',
-          'Accept-Encoding'=>'gzip, deflate',
-          'Content-Length'=>'29',
-          'Content-Type'=>'application/x-www-form-urlencoded',
-          'User-Agent'=>"Yammer Ruby Gem #{Yammer::Version}"
+          'Accept' => 'application/json',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Length' => '29',
+          'Content-Type' => 'application/x-www-form-urlencoded',
+          'User-Agent' => "Yammer Ruby Gem #{Yammer::Version}"
         }
       ).to_return(
         :status => 303,
@@ -279,13 +283,12 @@ describe Yammer::Client do
         :headers => {'Location' => "http://yammer.com/members"}
       )
 
-      stub_request(:get, "http://yammer.com/members").
-        with(
-          :headers => {
-            'Accept'=>'application/json',
-            'Accept-Encoding'=>'gzip, deflate',
-            'User-Agent'=> "Yammer Ruby Gem #{Yammer::Version}"
-          }
+      stub_request(:get, "http://yammer.com/members").with(
+        :headers => {
+          'Accept'=>'application/json',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent'=>"Yammer Ruby Gem #{Yammer::Version}"
+        }
       ).to_return(:status => 200, :body => "", :headers => {})
 
       response = subject.send(:request, :post, '/users', params )
@@ -307,7 +310,7 @@ describe Yammer::Client do
           :body => { :name => 'alice' }).to_return({
             :status => 200, :body => "", :headers => {}
           })
-        subject.post('/users', { :name => 'alice'})
+          subject.post('/users', { :name => 'alice'})
       end
     end
 
@@ -323,7 +326,7 @@ describe Yammer::Client do
           :body => { :name => 'bob' }).to_return(
             :status => 200, :body => "", :headers => {})
 
-        subject.put('/users/1', { :name => 'bob'})
+          subject.put('/users/1', { :name => 'bob'})
       end
     end
 
