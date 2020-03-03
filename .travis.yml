@@ -9,5 +9,4 @@ branches:
     - master
 before_install:
   - gem update --system
-  - gem update bundler
   - gem --version
