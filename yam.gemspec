@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'addressable', '~> 2.4'
   s.add_dependency 'oauth2-client', '~> 2.0'
 
-  s.add_development_dependency 'rake', '~> 0'
+  s.add_development_dependency 'rake', '~> 13'
   s.add_development_dependency 'rspec', '~> 0'
   s.add_development_dependency 'simplecov', '~> 0.11.1'
   s.add_development_dependency 'webmock', '~> 1.17', '>= 1.17.0'
